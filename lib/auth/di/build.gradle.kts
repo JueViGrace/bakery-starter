@@ -29,7 +29,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.bakery.lib.auth.di"
+    namespace = "com.bakery.auth.di"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

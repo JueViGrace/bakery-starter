@@ -21,3 +21,5 @@ kls_database.db
 
 # Ignore Gradle build output directory
 build
+
+.env

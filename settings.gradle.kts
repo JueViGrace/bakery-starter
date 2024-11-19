@@ -31,6 +31,14 @@ dependencyResolutionManagement {
 include(":client:composeApp")
 include(":server")
 
+// core library
+include(":lib:core:data:api")
+include(":lib:core:data:database")
+include(":lib:core:data:types")
+include(":lib:core:di")
+include(":lib:core:presentation")
+include(":lib:core:resources")
+
 // auth library
 include(":lib:auth:data")
 include(":lib:auth:di")

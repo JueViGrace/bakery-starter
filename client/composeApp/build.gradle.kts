@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
@@ -35,6 +34,12 @@ kotlin {
         }
 
         commonMain.dependencies {
+            implementation(projects.lib.core.presentation)
+            implementation(projects.lib.core.di)
+
+            implementation(projects.lib.auth.di)
+            implementation(projects.lib.auth.presentation)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -48,9 +53,7 @@ kotlin {
             implementation(libs.androidx.navigation.compose)
 
             // Kotlinx
-            implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.serialization.json)
 
             // Koin
             implementation(libs.koin.core)

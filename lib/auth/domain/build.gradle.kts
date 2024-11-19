@@ -21,15 +21,19 @@ kotlin {
         }
 
         commonMain.dependencies {
+            // Coroutines
+            implementation(libs.kotlinx.coroutines.core)
         }
 
         jvmMain.dependencies {
+            // Coroutines
+            implementation(libs.kotlinx.coroutines.swing)
         }
     }
 }
 
 android {
-    namespace = "com.bakery.lib.auth.domain"
+    namespace = "com.bakery.auth.domain"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
