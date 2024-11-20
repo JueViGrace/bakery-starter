@@ -23,7 +23,7 @@ sqldelight = "2.0.2"
 ktor = "3.0.0"
 kbcrypt = "1.0.9"
 logback = "1.5.6"
-sqlite = "3.47.0.0"
+sqlite = "3.45.3.0"
 kdotenv = "6.4.2"
 postgres = "42.7.4"
 
@@ -109,7 +109,10 @@ sqldelight-android-driver = { group = "app.cash.sqldelight", name = "android-dri
 sqldelight-sqlite-driver = { group = "app.cash.sqldelight", name = "sqlite-driver", version.ref = "sqldelight" }
 sqldelight-coroutines-extensions = { group = "app.cash.sqldelight", name = "coroutines-extensions", version.ref = "sqldelight" }
 sqldelight-async-extensions = { group = "app.cash.sqldelight", name = "async-extensions", version.ref = "sqldelight" }
-sqldelight-dialect = { group = "app.cash.sqldelight", name = "sqlite-3-37-dialect", version.ref = "sqldelight" }
+sqldelight-sqlite-dialect = { group = "app.cash.sqldelight", name = "sqlite-3-35-dialect", version.ref = "sqldelight" }
+sqldelight-postgres-dialect = { group = "app.cash.sqldelight", name = "postgresql-dialect", version.ref = "sqldelight" }
+
+# [DATABASES]
 sqlite = { group = "org.xerial", name = "sqlite-jdbc", version.ref = "sqlite" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgres" }
 

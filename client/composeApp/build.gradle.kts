@@ -34,6 +34,8 @@ kotlin {
         }
 
         commonMain.dependencies {
+            implementation(projects.lib.core.api.client)
+            implementation(projects.lib.core.database)
             implementation(projects.lib.core.presentation)
             implementation(projects.lib.core.di)
 

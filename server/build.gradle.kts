@@ -13,6 +13,8 @@ application {
 }
 
 dependencies {
+    implementation(projects.lib.core.api.server)
+
     // Server
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.serialization.kotlinx.json)

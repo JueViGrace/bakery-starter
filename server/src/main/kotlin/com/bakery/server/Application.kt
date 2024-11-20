@@ -7,6 +7,7 @@ import com.bakery.server.config.configureRoutes
 import com.bakery.server.config.configureRouting
 import com.bakery.server.config.configureSecurity
 import com.bakery.server.config.configureSerialization
+import com.bakery.server.config.configureTemplating
 import com.bakery.server.config.configureValidation
 import io.github.cdimascio.dotenv.dotenv
 import io.ktor.server.application.Application
@@ -25,6 +26,7 @@ fun Application.module() {
     configureRouting()
     configureSerialization()
     configureValidation()
+    configureTemplating()
     configureRoutes()
 }
 

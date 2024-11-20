@@ -8,7 +8,9 @@ import io.ktor.http.content.CachingOptions
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.plugins.cachingheaders.CachingHeaders
+import io.ktor.server.plugins.compression.Compression
 import io.ktor.server.plugins.cors.routing.CORS
+import io.ktor.server.plugins.defaultheaders.DefaultHeaders
 import io.ktor.server.webjars.Webjars
 
 fun Application.configureHTTP() {
@@ -33,4 +35,8 @@ fun Application.configureHTTP() {
             }
         }
     }
+
+    install(Compression)
+
+    install(DefaultHeaders)
 }

@@ -32,12 +32,15 @@ include(":client:composeApp")
 include(":server")
 
 // core library
-include(":lib:core:data:api")
-include(":lib:core:data:database")
-include(":lib:core:data:types")
+include(":lib:core:api:client")
+include(":lib:core:api:server")
+include(":lib:core:database")
 include(":lib:core:di")
 include(":lib:core:presentation")
 include(":lib:core:resources")
+include(":lib:core:types:shared")
+include(":lib:core:types:server")
+include(":lib:core:types:client")
 
 // auth library
 include(":lib:auth:data")
