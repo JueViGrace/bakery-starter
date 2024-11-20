@@ -1,4 +1,4 @@
-rootProject.name = "bakery"
+rootProject.name = "bakery-starter"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
