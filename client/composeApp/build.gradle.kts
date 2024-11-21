@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.composeCompiler)
 }
 
+group = "com.bakery.app"
+
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)

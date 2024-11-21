@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.sqldelight)
 }
 
+group = "com.bakery.core.database.client"
+
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -69,4 +71,8 @@ sqldelight {
             generateAsync.set(true)
         }
     }
+}
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

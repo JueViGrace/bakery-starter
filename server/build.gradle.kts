@@ -13,7 +13,8 @@ application {
 }
 
 dependencies {
-    implementation(projects.lib.core.api.server)
+    api(projects.lib.core.api.server)
+    api(projects.lib.core.database.server)
 
     // Server
     implementation(libs.ktor.server.core)
@@ -61,6 +62,6 @@ ktor {
     }
 
     fatJar {
-        archiveFileName.set("bakery.jar")
+        archiveFileName.set("fat.jar")
     }
 }

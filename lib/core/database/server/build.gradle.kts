@@ -1,38 +1,27 @@
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.sqldelight)
 }
 
-kotlin {
-    jvm("server")
+group = "com.bakery.core.database.server"
 
-    sourceSets {
-        val serverMain by getting
+dependencies {
+    implementation(projects.lib.core.database.shared)
 
-        commonMain.dependencies {
-            implementation(projects.lib.core.database.shared)
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.core)
 
-            // Coroutines
-            implementation(libs.kotlinx.coroutines.core)
+    // Sqldelight
+    implementation(libs.sqldelight.coroutines.extensions)
+    implementation(libs.sqldelight.async.extensions)
 
-            // Sqldelight
-            implementation(libs.sqldelight.coroutines.extensions)
-            implementation(libs.sqldelight.async.extensions)
-        }
+    // Sqlite
+    implementation(libs.sqldelight.sqlite.driver)
+    implementation(libs.sqlite)
 
-        serverMain.dependencies {
-            // Coroutines
-            implementation(libs.kotlinx.coroutines.swing)
-
-            // Sqlite
-            implementation(libs.sqldelight.sqlite.driver)
-            implementation(libs.sqlite)
-
-            // Postgres
-            // implementation(libs.sqldelight.postgres.driver)
-            // implementation(libs.postgresql)
-        }
-    }
+    // Postgres
+    // implementation(libs.sqldelight.postgres.driver)
+    // implementation(libs.postgresql)
 }
 
 sqldelight {
@@ -49,4 +38,8 @@ sqldelight {
 //            generateAsync.set(true)
 //        }
     }
+}
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

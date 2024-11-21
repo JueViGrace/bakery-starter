@@ -1,4 +1,4 @@
-package com.bakery.core.database.driver
+package com.bakery.core.database.shared.driver
 
 import app.cash.sqldelight.db.SqlDriver
 

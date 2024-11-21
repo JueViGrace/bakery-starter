@@ -3,7 +3,7 @@ package com.bakery.core.database.client.driver
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.bakery.core.database.client.BakeryCliDb
-import com.bakery.core.database.driver.DriverFactory
+import com.bakery.core.database.shared.driver.DriverFactory
 
 actual class DriverFactoryImpl : DriverFactory {
     override suspend fun createDriver(): SqlDriver {

@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.composeCompiler)
 }
 
+group = "com.bakery.core.resources"
+
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -48,4 +50,8 @@ android {
 
 compose.resources {
     publicResClass = true
+}
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.ktor)
 }
+
+group = "com.bakery.core.api.server"
 
 dependencies {
     implementation(projects.lib.core.types.shared)
@@ -24,4 +25,8 @@ dependencies {
 
     // Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.core)
+}
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

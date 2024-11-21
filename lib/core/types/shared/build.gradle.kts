@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
+group = "com.bakery.core.types.shared"
+
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -18,18 +20,12 @@ kotlin {
     jvm()
 
     sourceSets {
-        androidMain.dependencies {
-        }
-
         commonMain.dependencies {
             // Kotlin Datetime
             implementation(libs.kotlinx.datetime)
 
             // Serialization
             implementation(libs.kotlinx.serialization.json)
-        }
-
-        jvmMain.dependencies {
         }
     }
 }
@@ -46,4 +42,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
+}
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

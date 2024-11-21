@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
+group = "com.bakery.core.presentation"
+
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -67,4 +69,8 @@ android {
 
 compose.resources {
     generateResClass = never
+}
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

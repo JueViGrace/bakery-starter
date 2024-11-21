@@ -1,7 +1,7 @@
 package com.bakery.core.database.client.helper
 
 import com.bakery.core.database.client.BakeryCliDb
-import com.bakery.core.database.driver.DriverFactory
+import com.bakery.core.database.shared.driver.DriverFactory
 import com.bakery.core.database.shared.helper.DbHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.sync.withLock
