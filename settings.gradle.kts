@@ -34,7 +34,11 @@ include(":server")
 // core library
 include(":lib:core:api:client")
 include(":lib:core:api:server")
-include(":lib:core:database")
+
+include(":lib:core:database:client")
+include(":lib:core:database:server")
+include(":lib:core:database:shared")
+
 include(":lib:core:di")
 include(":lib:core:presentation")
 include(":lib:core:resources")
