@@ -2,7 +2,12 @@ plugins {
 }
 
 subprojects {
-//    tasks.withType<Jar> {
-//        archiveBaseName.set(project.name)
-//    }
+    tasks.withType<Jar> {
+        val projectName = project.path
+            .split(":")
+            .filter { it != "lib" && it.isNotEmpty() }
+            .joinToString("-")
+
+        archiveBaseName.set(projectName)
+    }
 }

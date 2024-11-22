@@ -56,6 +56,9 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 # [TIME]
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
+# [SERIALIZATION]
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
 # [DEPENDENCY INJECTION]
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin" }
@@ -100,9 +103,6 @@ kbcrypt = { group = "com.ToxicBakery.library.bcrypt", name = "bcrypt", version.r
 
 # [DOTENV]
 kdotenv = { group = "io.github.cdimascio", name = "dotenv-kotlin", version.ref = "kdotenv" }
-
-# [SERIALIZATION]
-kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
 # [DATABASE]
 sqldelight-android-driver = { group = "app.cash.sqldelight", name = "android-driver", version.ref = "sqldelight" }

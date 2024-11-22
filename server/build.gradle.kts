@@ -13,8 +13,8 @@ application {
 }
 
 dependencies {
-    api(projects.lib.core.api.server)
-    api(projects.lib.core.database.server)
+    implementation(projects.lib.core.api.server)
+    implementation(projects.lib.core.database.server)
 
     // Server
     implementation(libs.ktor.server.core)
