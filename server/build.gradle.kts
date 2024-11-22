@@ -14,7 +14,14 @@ application {
 
 dependencies {
     implementation(projects.lib.core.api.server)
+
+    implementation(projects.lib.core.database.shared)
     implementation(projects.lib.core.database.server)
+
+    implementation(projects.lib.core.di)
+
+    implementation(projects.lib.core.types.shared)
+    implementation(projects.lib.core.types.server)
 
     // Server
     implementation(libs.ktor.server.core)

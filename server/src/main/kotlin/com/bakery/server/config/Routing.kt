@@ -1,5 +1,8 @@
 package com.bakery.server.config
 
+import com.bakery.core.types.server.ServerResponse.badRequest
+import com.bakery.core.types.server.ServerResponse.internalServerError
+import com.bakery.core.types.server.applicationResponse
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.install
@@ -17,12 +20,22 @@ fun Application.configureRouting() {
     install(StatusPages) {
         exception<Throwable> { call: ApplicationCall, cause: Throwable ->
             logger.error("Unhandled error at: ${call.request.path()}", cause)
-            // todo: respond
+            call.applicationResponse(
+                response = internalServerError(
+                    data = "Something unexpected happened, try again later.",
+                    message = cause.message
+                )
+            )
         }
 
         exception<RequestValidationException> { call, cause ->
             logger.error("Validation error", cause)
-            // todo: respond
+            call.applicationResponse(
+                response = badRequest(
+                    data = "Validation error",
+                    message = cause.reasons.joinToString(",")
+                )
+            )
         }
     }
 

@@ -1,13 +1,12 @@
 package com.bakery.core.di
 
 import com.bakery.core.di.modules.coroutinesModule
+import org.koin.core.KoinApplication
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
-import org.koin.dsl.koinApplication
 
-object KoinBuilder {
-    private val app = koinApplication()
+class KoinBuilder(private val app: KoinApplication) {
     private val requiredModules = listOf(
         coroutinesModule(),
     )
