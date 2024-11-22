@@ -1,4 +1,4 @@
-package com.bakery.core.types.client.api
+package com.bakery.core.types.client
 
 import com.bakery.core.types.shared.DataError
 

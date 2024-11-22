@@ -48,6 +48,5 @@ include(":lib:core:types:client")
 
 // auth library
 include(":lib:auth:data")
-include(":lib:auth:di")
 include(":lib:auth:domain")
 include(":lib:auth:presentation")

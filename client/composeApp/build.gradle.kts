@@ -42,7 +42,6 @@ kotlin {
             implementation(projects.lib.core.presentation)
             implementation(projects.lib.core.di)
 
-            implementation(projects.lib.auth.di)
             implementation(projects.lib.auth.presentation)
 
             implementation(compose.runtime)
