@@ -23,16 +23,10 @@ include(":server")
 include(":lib")
 
 include(":lib:core:api:client")
-// project(":lib:core:api:client").name = "api-client"
-
 include(":lib:core:api:server")
-// project(":lib:core:api:server").name = "api-server"
 
 include(":lib:core:database:client")
-
 include(":lib:core:database:server")
-// project(":lib:core:database:server").name = "database-server"
-
 include(":lib:core:database:shared")
 
 include(":lib:core:di")
@@ -40,13 +34,21 @@ include(":lib:core:presentation")
 
 include(":lib:core:resources")
 
+include(":lib:core:types:client")
+include(":lib:core:types:server")
 include(":lib:core:types:shared")
 
-include(":lib:core:types:server")
-
-include(":lib:core:types:client")
-
 // auth library
-include(":lib:auth:data")
-include(":lib:auth:domain")
+
+//  auth data
+include(":lib:auth:data:client")
+include(":lib:auth:data:server")
+include(":lib:auth:data:shared")
+
+// auth domain
+include(":lib:auth:domain:client")
+include(":lib:auth:domain:server")
+include(":lib:auth:domain:shared")
+
+// auth presentation
 include(":lib:auth:presentation")
