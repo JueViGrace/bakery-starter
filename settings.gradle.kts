@@ -18,37 +18,44 @@ dependencyResolutionManagement {
 
 include(":client:composeApp")
 include(":server")
-
-// core library
 include(":lib")
 
-include(":lib:core:api:client")
-include(":lib:core:api:server")
+// core client library
+include(":lib:core:client:api")
+include(":lib:core:client:database")
+include(":lib:core:client:presentation")
+include(":lib:core:client:resources")
+include(":lib:core:client:types")
 
-include(":lib:core:database:client")
-include(":lib:core:database:server")
-include(":lib:core:database:shared")
+// core server library
+include(":lib:core:server:api")
+include(":lib:core:server:database")
+include(":lib:core:server:types")
 
-include(":lib:core:di")
-include(":lib:core:presentation")
-
-include(":lib:core:resources")
-
-include(":lib:core:types:client")
-include(":lib:core:types:server")
-include(":lib:core:types:shared")
+// core shared library
+include(":lib:core:shared:database")
+include(":lib:core:shared:di")
+include(":lib:core:shared:types")
 
 // auth library
+include(":lib:auth:shared:types")
 
-//  auth data
-include(":lib:auth:data:client")
-include(":lib:auth:data:server")
-include(":lib:auth:data:shared")
+//  auth client
+include(":lib:auth:client:data")
+include(":lib:auth:client:domain")
 
-// auth domain
-include(":lib:auth:domain:client")
-include(":lib:auth:domain:server")
-include(":lib:auth:domain:shared")
+include(":lib:auth:client:presentation")
+// auth server
+include(":lib:auth:server:data")
+include(":lib:auth:server:di")
+include(":lib:auth:server:routes")
+include(":lib:auth:server:validation")
 
-// auth presentation
-include(":lib:auth:presentation")
+// user library
+include(":lib:user:shared:types")
+
+// user server
+include(":lib:user:server:data")
+include(":lib:user:server:di")
+include(":lib:user:server:routes")
+include(":lib:user:server:validation")

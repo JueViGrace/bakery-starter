@@ -1,9 +1,9 @@
 package com.bakery.app.di
 
-import com.bakery.core.database.client.driver.DriverFactoryImpl
-import com.bakery.core.database.client.helper.DbHelperImpl
-import com.bakery.core.database.shared.driver.DriverFactory
-import com.bakery.core.database.shared.helper.DbHelper
+import com.bakery.core.client.database.driver.DriverFactoryImpl
+import com.bakery.core.client.database.helper.DbHelperImpl
+import com.bakery.core.shared.database.driver.DriverFactory
+import com.bakery.core.shared.database.helper.DbHelper
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind

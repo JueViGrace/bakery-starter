@@ -1,8 +1,8 @@
 package com.bakery.server.config
 
-import com.bakery.core.types.server.ServerResponse.badRequest
-import com.bakery.core.types.server.ServerResponse.internalServerError
-import com.bakery.core.types.server.applicationResponse
+import com.bakery.core.server.types.ServerResponse.badRequest
+import com.bakery.core.server.types.ServerResponse.internalServerError
+import com.bakery.core.server.types.applicationResponse
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.install
