@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
-group = "com.bakery.core.client.presentation"
+group = "com.bakery.core.presentation"
 
 kotlin {
     androidTarget {
@@ -26,6 +26,7 @@ kotlin {
         }
 
         commonMain.dependencies {
+            // Compose Resources
             implementation(projects.lib.core.client.resources)
 
             implementation(compose.runtime)
@@ -34,6 +35,7 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
 
+            // Navigation
             implementation(libs.androidx.navigation.compose)
 
             // Coroutines
@@ -54,7 +56,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.bakery.core.client.presentation"
+    namespace = "com.bakery.core.presentation"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

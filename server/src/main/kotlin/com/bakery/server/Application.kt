@@ -1,7 +1,7 @@
 package com.bakery.server
 
-import com.bakery.server.config.configureHTTP
 import com.bakery.server.config.configureKoin
+import com.bakery.server.config.configureHTTP
 import com.bakery.server.config.configureMonitoring
 import com.bakery.server.config.configureRoutes
 import com.bakery.server.config.configureRouting

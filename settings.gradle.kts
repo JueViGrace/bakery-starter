@@ -33,7 +33,6 @@ include(":lib:core:server:database")
 include(":lib:core:server:types")
 
 // core shared library
-include(":lib:core:shared:database")
 include(":lib:core:shared:di")
 include(":lib:core:shared:types")
 

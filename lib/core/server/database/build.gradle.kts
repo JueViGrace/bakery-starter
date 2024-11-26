@@ -3,11 +3,9 @@ plugins {
     alias(libs.plugins.sqldelight)
 }
 
-group = "com.bakery.core.server.database"
+group = "com.bakery.core.database"
 
 dependencies {
-    implementation(projects.lib.core.shared.database)
-
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)
 
@@ -27,7 +25,7 @@ dependencies {
 sqldelight {
     databases {
         create("BakerySvDb") {
-            packageName.set("com.bakery.core.server.database")
+            packageName.set("com.bakery.core.database")
             dialect(libs.sqldelight.sqlite.dialect)
             generateAsync.set(true)
         }

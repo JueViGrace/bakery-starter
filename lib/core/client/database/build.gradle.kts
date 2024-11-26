@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.sqldelight)
 }
 
-group = "com.bakery.core.client.database"
+group = "com.bakery.core.database"
 
 kotlin {
     androidTarget {
@@ -28,8 +28,6 @@ kotlin {
         }
 
         commonMain.dependencies {
-            implementation(projects.lib.core.shared.database)
-
             // Coroutines
             implementation(libs.kotlinx.coroutines.core)
 
@@ -42,15 +40,17 @@ kotlin {
             // Coroutines
             implementation(libs.kotlinx.coroutines.core)
 
-            // Sqlite
+            // Sqldelight
             implementation(libs.sqldelight.sqlite.driver)
+
+            // Sqlite
             implementation(libs.sqlite)
         }
     }
 }
 
 android {
-    namespace = "com.bakery.core.client.database"
+    namespace = "com.bakery.core.database"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -66,7 +66,7 @@ android {
 sqldelight {
     databases {
         create("BakeryCliDb") {
-            packageName.set("com.bakery.core.database.client")
+            packageName.set("com.bakery.core.database")
             dialect(libs.sqldelight.sqlite.dialect)
             generateAsync.set(true)
         }

@@ -31,7 +31,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.closs.core.types.shared"
+    namespace = "com.closs.core.shared.types"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

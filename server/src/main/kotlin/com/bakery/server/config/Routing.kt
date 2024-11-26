@@ -1,8 +1,8 @@
 package com.bakery.server.config
 
-import com.bakery.core.server.types.ServerResponse.badRequest
-import com.bakery.core.server.types.ServerResponse.internalServerError
-import com.bakery.core.server.types.applicationResponse
+import com.bakery.core.types.ServerResponse.badRequest
+import com.bakery.core.types.ServerResponse.internalServerError
+import com.bakery.core.types.applicationResponse
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.install
@@ -11,7 +11,6 @@ import io.ktor.server.plugins.requestvalidation.RequestValidationException
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.request.path
 import io.ktor.server.routing.routing
-import io.ktor.server.sse.SSE
 import org.slf4j.LoggerFactory
 
 fun Application.configureRouting() {
@@ -39,7 +38,7 @@ fun Application.configureRouting() {
         }
     }
 
-    install(SSE)
+//    install(SSE)
 
     routing {
         staticResources("/static", "static")

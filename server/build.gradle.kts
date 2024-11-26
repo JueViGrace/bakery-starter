@@ -10,14 +10,21 @@ version = libs.versions.server.version
 
 application {
     mainClass.set("com.bakery.server.ApplicationKt")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
 }
 
 dependencies {
-    implementation(projects.lib.core.server.api)
+    // Types: core
+    implementation(projects.lib.core.shared.types)
+
+    // Types: server
+    implementation(projects.lib.core.server.types)
+
+    // Di: core
     implementation(projects.lib.core.shared.di)
 
-    implementation(projects.lib.core.shared.types)
-    implementation(projects.lib.core.server.types)
+    // Api: server
+    implementation(projects.lib.core.server.api)
 
     // Server
     implementation(libs.ktor.server.core)
@@ -34,7 +41,7 @@ dependencies {
     implementation(libs.ktor.server.compression)
     implementation(libs.ktor.server.host.common)
     implementation(libs.ktor.server.status.pages)
-    implementation(libs.ktor.server.sse)
+//    implementation(libs.ktor.server.sse)
     implementation(libs.ktor.server.auth)
     implementation(libs.ktor.server.auth.jwt)
     implementation(libs.ktor.server.netty)
@@ -49,6 +56,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
 
     // Koin
+    implementation(libs.koin.core)
     implementation(libs.koin.ktor)
     implementation(libs.koin.logger)
 

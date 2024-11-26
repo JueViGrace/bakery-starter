@@ -3,9 +3,10 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
-group = "com.bakery.core.server.types"
+group = "com.bakery.core.types"
 
 dependencies {
+    // Types: core
     implementation(projects.lib.core.shared.types)
 
     // Ktor

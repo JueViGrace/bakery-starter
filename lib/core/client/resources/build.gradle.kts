@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
 }
 
-group = "com.bakery.core.client.resources"
+group = "com.bakery.core.resources"
 
 kotlin {
     androidTarget {
@@ -35,7 +35,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.bakery.core.client.resources"
+    namespace = "com.bakery.core.resources"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

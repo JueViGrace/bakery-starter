@@ -28,6 +28,7 @@ kotlin {
         }
 
         commonMain.dependencies {
+            // Compose Resources
             implementation(projects.lib.core.client.resources)
 
             implementation(compose.runtime)

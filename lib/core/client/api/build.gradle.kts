@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
-group = "com.bakery.core.client.api"
+group = "com.bakery.core.api"
 
 kotlin {
     androidTarget {
@@ -24,7 +24,10 @@ kotlin {
         }
 
         commonMain.dependencies {
+            // Types: core
             implementation(projects.lib.core.shared.types)
+
+            // Types: client
             implementation(projects.lib.core.client.types)
 
             // Kotlin Datetime
@@ -52,7 +55,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.bakery.core.client.api"
+    namespace = "com.bakery.core.api"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

@@ -8,7 +8,7 @@ import io.ktor.server.application.log
 import io.ktor.server.metrics.dropwizard.DropwizardMetrics
 import io.ktor.server.plugins.callid.CallId
 import io.ktor.server.plugins.callid.callIdMdc
-import io.ktor.server.plugins.calllogging.CallLogging
+import io.ktor.server.plugins.callloging.CallLogging
 import io.ktor.server.request.path
 import org.slf4j.event.Level
 import java.util.concurrent.TimeUnit

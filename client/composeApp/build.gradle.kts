@@ -37,7 +37,6 @@ kotlin {
 
         commonMain.dependencies {
             implementation(projects.lib.core.client.api)
-            implementation(projects.lib.core.shared.database)
             implementation(projects.lib.core.client.database)
             implementation(projects.lib.core.client.presentation)
             implementation(projects.lib.core.shared.di)

@@ -2,13 +2,13 @@ plugins {
     alias(libs.plugins.kotlinJvm)
 }
 
-group = "com.bakery.auth.server.di"
+group = "com.bakery.auth.di"
 
 dependencies {
-    implementation(projects.lib.core.shared.di)
-    implementation(projects.lib.core.shared.database)
+    // Database: server
     implementation(projects.lib.core.server.database)
 
+    // Data: auth
     implementation(projects.lib.auth.server.data)
 
     // Coroutines

@@ -20,7 +20,7 @@ kotlinx-serialization = "1.7.3"
 koin = "4.0.0"
 kotlinx-datetime = "0.6.1"
 sqldelight = "2.0.2"
-ktor = "3.0.1"
+ktor = "2.3.13"
 kbcrypt = "1.0.9"
 logback = "1.5.11"
 sqlite = "3.45.3.0"
@@ -65,6 +65,9 @@ koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = 
 koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
+#koin-ktor3 = { module = "io.insert-koin:koin-ktor3", version.ref = "koin" }
+koin-logger = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koin" }
 
 # [NETWORK: CLIENT]
 ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
@@ -72,8 +75,6 @@ ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "
 ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
-koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koin" }
-koin-logger = { module = "io.insert-koin:koin-logger-slf4j", version.ref = "koin" }
 
 # [SERVER]
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
@@ -90,7 +91,7 @@ ktor-server-cors = { module = "io.ktor:ktor-server-cors-jvm", version.ref = "kto
 ktor-server-compression = { module = "io.ktor:ktor-server-compression-jvm", version.ref = "ktor" }
 ktor-server-host-common = { module = "io.ktor:ktor-server-host-common-jvm", version.ref = "ktor" }
 ktor-server-status-pages = { module = "io.ktor:ktor-server-status-pages-jvm", version.ref = "ktor" }
-ktor-server-sse = { module = "io.ktor:ktor-server-sse-jvm", version.ref = "ktor" }
+#ktor-server-sse = { module = "io.ktor:ktor-server-sse-jvm", version.ref = "ktor" }
 ktor-server-auth = { module = "io.ktor:ktor-server-auth-jvm", version.ref = "ktor" }
 ktor-server-auth-jwt = { module = "io.ktor:ktor-server-auth-jwt-jvm", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }

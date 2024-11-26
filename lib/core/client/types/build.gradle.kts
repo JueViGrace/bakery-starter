@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
-group = "com.bakery.core.client.types"
+group = "com.bakery.core.types"
 
 kotlin {
     androidTarget {
@@ -26,7 +26,10 @@ kotlin {
         }
 
         commonMain.dependencies {
+            // Types: core
             implementation(projects.lib.core.shared.types)
+
+            // Compose Resources
             implementation(projects.lib.core.client.resources)
 
             implementation(compose.runtime)
@@ -48,7 +51,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.closs.core.client.types"
+    namespace = "com.closs.core.types"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

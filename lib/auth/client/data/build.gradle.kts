@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
 }
 
+group = "com.bakery.auth.data"
+
 kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -29,7 +31,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.bakery.auth.data.client"
+    namespace = "com.bakery.auth.data"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

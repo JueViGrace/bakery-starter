@@ -2,7 +2,7 @@ package com.bakery.app
 
 import android.app.Application
 import com.bakery.app.di.appModule
-import com.bakery.core.shared.di.KoinBuilder
+import com.bakery.core.di.KoinBuilder
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.logger.Level
