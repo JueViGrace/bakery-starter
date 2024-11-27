@@ -1,4 +1,4 @@
-package com.bakery.core.api.di
+package com.bakery.server.di
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

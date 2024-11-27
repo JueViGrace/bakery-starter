@@ -12,18 +12,11 @@ dependencies {
     // Types: server
     implementation(projects.lib.core.server.types)
 
-    // Database: server
-    implementation(projects.lib.core.server.database)
-
     // Auth
-    implementation(projects.lib.auth.server.di)
-    implementation(projects.lib.auth.server.data)
     implementation(projects.lib.auth.server.routes)
     implementation(projects.lib.auth.server.validation)
 
     // User
-    implementation(projects.lib.user.server.di)
-    implementation(projects.lib.user.server.data)
     implementation(projects.lib.user.server.routes)
     implementation(projects.lib.user.server.validation)
 

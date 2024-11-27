@@ -1,4 +1,4 @@
-package com.bakery.core.api.di
+package com.bakery.server.di
 
 import com.bakery.core.database.driver.DriverFactory
 import com.bakery.core.database.helper.DbHelper

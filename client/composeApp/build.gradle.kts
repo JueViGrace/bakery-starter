@@ -28,21 +28,30 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.core.ktx)
+
+            // App update
             implementation(libs.androidx.app.update)
             implementation(libs.androidx.app.update.ktx)
 
+            // Koin
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
         }
 
         commonMain.dependencies {
-            implementation(projects.lib.core.client.api)
-            implementation(projects.lib.core.client.database)
-            implementation(projects.lib.core.client.presentation)
+            // Di: core
             implementation(projects.lib.core.shared.di)
 
-            implementation(projects.lib.auth.client.presentation)
+            // Api: client
+            implementation(projects.lib.core.client.api)
 
+            // Database: client
+            implementation(projects.lib.core.client.database)
+
+            // Presentation: client
+            implementation(projects.lib.core.client.presentation)
+
+            // Compose
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -50,9 +59,12 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
+            // ViewModel
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.viewmodel.savedstate)
             implementation(libs.androidx.lifecycle.runtime.compose)
+
+            // Navigation
             implementation(libs.androidx.navigation.compose)
 
             // Kotlinx
@@ -66,6 +78,8 @@ kotlin {
 
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+
+            // Coroutines
             implementation(libs.kotlinx.coroutines.swing)
         }
     }
