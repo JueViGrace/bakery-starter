@@ -31,6 +31,7 @@ include(":lib:core:client:types")
 include(":lib:core:server:api")
 include(":lib:core:server:database")
 include(":lib:core:server:types")
+include(":lib:core:server:util")
 
 // core shared library
 include(":lib:core:shared:di")
@@ -42,8 +43,8 @@ include(":lib:auth:shared:types")
 //  auth client
 include(":lib:auth:client:data")
 include(":lib:auth:client:domain")
-
 include(":lib:auth:client:presentation")
+
 // auth server
 include(":lib:auth:server:data")
 include(":lib:auth:server:di")

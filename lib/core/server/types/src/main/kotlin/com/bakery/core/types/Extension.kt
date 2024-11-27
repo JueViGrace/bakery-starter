@@ -5,7 +5,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.response.respond
 
-suspend inline fun <reified T> ApplicationCall.applicationResponse(response: APIResponse<T>) {
+suspend fun ApplicationCall.applicationResponse(response: APIResponse) {
     respond(
         status = HttpStatusCode(
             value = response.status,

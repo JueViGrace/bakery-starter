@@ -19,7 +19,7 @@ class DbHelper(
     private var db: BakerySvDb? = null
     private val mutex = Mutex()
 
-    suspend fun <Result> withDatabase(block: suspend (BakerySvDb) -> Result): Result = mutex.withLock {
+    suspend fun <Result> withDatabase(block: suspend DbHelper.(BakerySvDb) -> Result): Result = mutex.withLock {
         if (db == null) {
             db = createDb()
         }

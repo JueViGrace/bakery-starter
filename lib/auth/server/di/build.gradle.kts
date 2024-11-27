@@ -8,6 +8,9 @@ dependencies {
     // Database: server
     implementation(projects.lib.core.server.database)
 
+    // Util: server
+    implementation(projects.lib.core.server.util)
+
     // Data: auth
     implementation(projects.lib.auth.server.data)
 

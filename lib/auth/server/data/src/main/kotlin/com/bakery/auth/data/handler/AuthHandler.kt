@@ -15,35 +15,83 @@ interface AuthHandler {
     suspend fun signIn(dto: SignInDto): APIResponse<AuthDto?>
     suspend fun signUp(dto: SignUpDto): APIResponse<AuthDto?>
     suspend fun refresh(dto: RefreshTokenDto): APIResponse<AuthDto?>
-    suspend fun forgotPassword(dto: ForgotPasswordDto): APIResponse<String>
+    suspend fun forgotPassword(dto: ForgotPasswordDto): APIResponse<AuthDto?>
 }
 
-// todo: make validations
 class DefaultAuthHandler(
     private val coroutineContext: CoroutineContext,
     private val repository: AuthRepository
 ) : AuthHandler {
     override suspend fun signIn(dto: SignInDto): APIResponse<AuthDto?> {
         return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.signIn(dto), message = "Processed successfully")
+            val result = repository.getValidUser(dto)
+
+            if (result == null) {
+                return@withContext ServerResponse.badRequest(
+                    data = null,
+                    message = "Invalid credentials"
+                )
+            }
+
+            return@withContext ServerResponse.ok(
+                data = result,
+                message = "Processed successfully"
+            )
         }
     }
 
     override suspend fun signUp(dto: SignUpDto): APIResponse<AuthDto?> {
         return withContext(coroutineContext) {
-            ServerResponse.created(data = repository.signUp(dto), message = "Processed successfully")
+            val result = repository.signUp(dto)
+
+            if (result == null) {
+                return@withContext ServerResponse.badRequest(
+                    data = null,
+                    message = "Unable to create user, try again later."
+                )
+            }
+
+            ServerResponse.created(
+                data = result,
+                message = "Processed successfully"
+            )
         }
     }
 
     override suspend fun refresh(dto: RefreshTokenDto): APIResponse<AuthDto?> {
         return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.refresh(dto), message = "Processed successfully")
+            val result = repository.refresh(dto)
+
+            if (result == null) {
+                return@withContext ServerResponse.badRequest(
+                    data = null,
+                    message = "Invalid refresh token"
+                )
+            }
+
+            return@withContext ServerResponse.ok(
+                data = result,
+                message = "Processed successfully"
+            )
         }
     }
 
-    override suspend fun forgotPassword(dto: ForgotPasswordDto): APIResponse<String> {
+    // todo: do this right
+    override suspend fun forgotPassword(dto: ForgotPasswordDto): APIResponse<AuthDto?> {
         return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.forgotPassword(dto), message = "Processed successfully")
+            val result = repository.forgotPassword(dto)
+
+            if (result == null) {
+                return@withContext ServerResponse.badRequest(
+                    data = null,
+                    message = "Unable to process change of password, try again."
+                )
+            }
+
+            return@withContext ServerResponse.ok(
+                data = result,
+                message = "Processed successfully"
+            )
         }
     }
 }

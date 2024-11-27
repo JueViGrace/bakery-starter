@@ -11,6 +11,9 @@ dependencies {
     // Types: auth
     implementation(projects.lib.auth.shared.types)
 
+    // Util: server
+    implementation(projects.lib.core.server.util)
+
     // Server
     implementation(libs.ktor.server.request.validation)
 }

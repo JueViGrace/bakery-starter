@@ -2,6 +2,7 @@ package com.bakery.auth.validation
 
 import com.bakery.auth.shared.types.SignUpDto
 import com.bakery.core.shared.types.Constants
+import com.bakery.core.util.Util.verifyEmail
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 
@@ -21,6 +22,7 @@ internal fun RequestValidationConfig.validateSignUpDto() {
                 ValidationResult.Invalid("Username must be longer than 4 characters")
             }
             dto.email.isBlank() -> ValidationResult.Invalid("Email cannot be blank")
+            !verifyEmail(dto.email) -> ValidationResult.Invalid("Email is not a valid email")
             dto.password.isBlank() -> ValidationResult.Invalid("Password cannot be blank")
             dto.password.length < Constants.MINIMUM_LENGTH -> {
                 ValidationResult.Invalid("Password must be longer than 4 characters")

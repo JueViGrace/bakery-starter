@@ -7,6 +7,7 @@ import org.koin.core.module.Module
 fun serverModule(): List<Module> = listOf(
     coroutinesModule(),
     databaseModule(),
+    utilModule(),
     authModule(),
     userModule()
 )

@@ -20,6 +20,9 @@ dependencies {
     // Types: server
     implementation(projects.lib.core.server.types)
 
+    // Util: server
+    implementation(projects.lib.core.server.util)
+
     // Database: server
     implementation(projects.lib.core.server.database)
 
@@ -63,6 +66,9 @@ dependencies {
 
     // Kotlin Coroutines
     implementation(libs.kotlinx.coroutines.core)
+
+    // Kotlin time
+    implementation(libs.kotlinx.datetime)
 
     // Koin
     implementation(libs.koin.core)

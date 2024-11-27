@@ -29,12 +29,14 @@ fun Application.configureRouting() {
 
         exception<RequestValidationException> { call, cause ->
             logger.error("Validation error", cause)
-            call.applicationResponse(
-                response = badRequest(
-                    data = "Validation error",
-                    message = cause.reasons.joinToString(",")
+            call.run {
+                applicationResponse(
+                    response = badRequest(
+                        data = null,
+                        message = cause.reasons.joinToString(",")
+                    )
                 )
-            )
+            }
         }
     }
 
