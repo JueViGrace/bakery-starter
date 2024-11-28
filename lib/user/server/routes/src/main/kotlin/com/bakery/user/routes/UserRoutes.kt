@@ -1,8 +1,11 @@
 package com.bakery.user.routes
 
+import com.bakery.core.types.ServerResponse.badRequest
 import com.bakery.core.types.applicationResponse
 import com.bakery.user.data.handler.UserHandler
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
+import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 import io.ktor.server.routing.route
@@ -35,7 +38,63 @@ fun Route.userRoutes() {
         get {
             val response = handler.getUsers()
 
-            call.applicationResponse(response)
+            call.applicationResponse(
+                response = response,
+                onSuccess = { res ->
+                    call.respond(
+                        status = HttpStatusCode(
+                            value = res.status,
+                            description = res.description
+                        ),
+                        message = res
+                    )
+                },
+                onFailure = { res ->
+                    call.respond(
+                        status = HttpStatusCode(
+                            value = res.status,
+                            description = res.description
+                        ),
+                        message = res
+                    )
+                }
+            )
+        }
+
+        get("{id}") {
+            val idParam = call.parameters["id"]
+            if (idParam == null) {
+                return@get call.respond(
+                    status = HttpStatusCode.BadRequest,
+                    message = badRequest(
+                        message = "Invalid request"
+                    )
+                )
+            }
+
+            val response = handler.getUserById(idParam)
+
+            call.applicationResponse(
+                response = response,
+                onSuccess = { res ->
+                    call.respond(
+                        status = HttpStatusCode(
+                            value = res.status,
+                            description = res.description
+                        ),
+                        message = res
+                    )
+                },
+                onFailure = { res ->
+                    call.respond(
+                        status = HttpStatusCode(
+                            value = res.status,
+                            description = res.description
+                        ),
+                        message = res
+                    )
+                }
+            )
         }
     }
 }

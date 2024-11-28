@@ -6,7 +6,7 @@ import com.bakery.auth.shared.types.ForgotPasswordDto
 import com.bakery.auth.shared.types.RefreshTokenDto
 import com.bakery.auth.shared.types.SignInDto
 import com.bakery.auth.shared.types.SignUpDto
-import com.bakery.core.shared.types.APIResponse
+import com.bakery.core.types.APIResponse
 import com.bakery.core.types.ServerResponse
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
@@ -28,7 +28,6 @@ class DefaultAuthHandler(
 
             if (result == null) {
                 return@withContext ServerResponse.badRequest(
-                    data = null,
                     message = "Invalid credentials"
                 )
             }
@@ -46,7 +45,6 @@ class DefaultAuthHandler(
 
             if (result == null) {
                 return@withContext ServerResponse.badRequest(
-                    data = null,
                     message = "Unable to create user, try again later."
                 )
             }
@@ -64,7 +62,6 @@ class DefaultAuthHandler(
 
             if (result == null) {
                 return@withContext ServerResponse.badRequest(
-                    data = null,
                     message = "Invalid refresh token"
                 )
             }
@@ -83,7 +80,6 @@ class DefaultAuthHandler(
 
             if (result == null) {
                 return@withContext ServerResponse.badRequest(
-                    data = null,
                     message = "Unable to process change of password, try again."
                 )
             }

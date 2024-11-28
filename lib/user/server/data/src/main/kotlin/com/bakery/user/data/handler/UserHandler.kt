@@ -1,6 +1,6 @@
 package com.bakery.user.data.handler
 
-import com.bakery.core.shared.types.APIResponse
+import com.bakery.core.types.APIResponse
 import com.bakery.core.types.ServerResponse
 import com.bakery.user.data.repository.UserRepository
 import com.bakery.user.shared.types.UserDto

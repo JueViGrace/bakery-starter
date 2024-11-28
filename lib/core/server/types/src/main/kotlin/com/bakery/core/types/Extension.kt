@@ -1,11 +1,9 @@
 package com.bakery.core.types
 
-import com.bakery.core.shared.types.APIResponse
-import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
-import io.ktor.server.response.respond
 
-suspend fun ApplicationCall.applicationResponse(response: APIResponse) {
+/*
+suspend inline fun<reified T> ApplicationCall.applicationResponse(response: APIResponse<T>) {
     respond(
         status = HttpStatusCode(
             value = response.status,
@@ -13,4 +11,16 @@ suspend fun ApplicationCall.applicationResponse(response: APIResponse) {
         ),
         message = response,
     )
+}
+*/
+
+inline fun<reified T> ApplicationCall.applicationResponse(
+    response: APIResponse<T>,
+    onSuccess: (APIResponse.Success<T>) -> Unit,
+    onFailure: (APIResponse.Failure) -> Unit
+) {
+    when (response) {
+        is APIResponse.Failure -> onFailure(response)
+        is APIResponse.Success -> onSuccess(response)
+    }
 }
