@@ -24,15 +24,23 @@ SELECT *
 FROM bakery_user
 WHERE id = :id;
 
+findExistingOne:
+SELECT *
+FROM bakery_user
+WHERE id = :id AND
+deleted_at IS NULL;
+
 findOneByEmail:
 SELECT *
 FROM bakery_user
-WHERE email = :email;
+WHERE email = :email AND
+deleted_at IS NULL;
 
 findOneByUsername:
 SELECT *
 FROM bakery_user
-WHERE username = :username;
+WHERE username = :username AND
+deleted_at IS NULL;
 
 insert:
 INSERT OR REPLACE INTO bakery_user(
@@ -53,7 +61,6 @@ update:
 UPDATE bakery_user SET
     first_name = :first_name,
     last_name = :last_name,
-    username = :username,
     phone_number = :phone_number,
     birth_date = :birth_date,
     address1 = :address1,

@@ -12,13 +12,21 @@ dependencies {
     // Types: server
     implementation(projects.lib.core.server.types)
 
+    // Util: server
+    implementation(projects.lib.core.server.util)
+
+    // Database: server
+    implementation(projects.lib.core.server.database)
+
     // Auth
     implementation(projects.lib.auth.server.routes)
     implementation(projects.lib.auth.server.validation)
+    implementation(projects.lib.auth.server.di)
 
     // User
     implementation(projects.lib.user.server.routes)
     implementation(projects.lib.user.server.validation)
+    implementation(projects.lib.user.server.di)
 
     // Server
     implementation(libs.ktor.server.core)
@@ -36,6 +44,7 @@ dependencies {
 
     // Koin
     implementation(libs.koin.core)
+//    implementation(libs.koin.ktor)
 
     // Kotlin Serialization
     implementation(libs.kotlinx.serialization.json)

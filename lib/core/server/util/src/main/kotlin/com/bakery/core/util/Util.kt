@@ -1,6 +1,8 @@
 package com.bakery.core.util
 
 import java.util.regex.Pattern
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 object Util {
     fun verifyEmail(string: String): Boolean {
@@ -15,5 +17,15 @@ object Util {
         )
 
         return pattern.matcher(string).matches()
+    }
+
+    @OptIn(ExperimentalUuidApi::class)
+    fun validUuid(id: String): Boolean {
+        return try {
+            Uuid.parse(id)
+            true
+        } catch (e: IllegalStateException) {
+            false
+        }
     }
 }

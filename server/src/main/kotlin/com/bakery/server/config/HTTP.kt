@@ -30,7 +30,6 @@ fun Application.configureHTTP() {
                 ContentType.Text.Plain -> CachingOptions(MaxAge(maxAgeSeconds = 24 * 60 * 60))
                 ContentType.Text.Html -> CachingOptions(MaxAge(maxAgeSeconds = 24 * 60 * 60))
                 ContentType.Text.CSS -> CachingOptions(MaxAge(maxAgeSeconds = 24 * 60 * 60))
-
                 else -> null
             }
         }

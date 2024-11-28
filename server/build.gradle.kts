@@ -26,15 +26,6 @@ dependencies {
     // Database: server
     implementation(projects.lib.core.server.database)
 
-    // Di: core
-    implementation(projects.lib.core.shared.di)
-
-    // Di: auth
-    implementation(projects.lib.auth.server.di)
-
-    // Di: user
-    implementation(projects.lib.user.server.di)
-
     // Api: server
     implementation(projects.lib.core.server.api)
 

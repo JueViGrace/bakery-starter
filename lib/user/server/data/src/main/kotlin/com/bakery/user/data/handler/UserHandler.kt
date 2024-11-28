@@ -3,18 +3,19 @@ package com.bakery.user.data.handler
 import com.bakery.core.types.APIResponse
 import com.bakery.core.types.ServerResponse
 import com.bakery.user.data.repository.UserRepository
+import com.bakery.user.shared.types.UpdateUserDto
 import com.bakery.user.shared.types.UserDto
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
+// todo: check for conflicts
 interface UserHandler {
     suspend fun getUsers(): APIResponse<List<UserDto>>
     suspend fun getUserById(id: String): APIResponse<UserDto?>
-    suspend fun getUserByUsername(username: String): APIResponse<UserDto?>
-    suspend fun getUserByEmail(email: String): APIResponse<UserDto?>
-    suspend fun updateUser(dto: UserDto): APIResponse<UserDto?>
-    suspend fun softDeleteUser(id: String): APIResponse<UserDto?>
-    suspend fun deleteUser(id: String): APIResponse<UserDto?>
+    suspend fun getExistingUserById(id: String): APIResponse<UserDto?>
+    suspend fun updateUser(dto: UpdateUserDto): APIResponse<UserDto?>
+    suspend fun softDeleteUser(id: String): APIResponse<String>
+    suspend fun deleteUser(id: String): APIResponse<String>
 }
 
 class DefaultUserHandler(
@@ -23,43 +24,86 @@ class DefaultUserHandler(
 ) : UserHandler {
     override suspend fun getUsers(): APIResponse<List<UserDto>> {
         return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.getUsers(), message = "Processed successfully")
+            val result = repository.getUsers()
+
+            if (result.isEmpty()) {
+                return@withContext ServerResponse.notFound(
+                    data = result,
+                    message = "There are no users"
+                )
+            }
+
+            ServerResponse.ok(data = result, message = "Processed successfully")
         }
     }
 
     override suspend fun getUserById(id: String): APIResponse<UserDto?> {
         return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.getUserById(id), message = "Processed successfully")
+            val result = repository.getUserById(id)
+
+            if (result == null) {
+                return@withContext ServerResponse.notFound(
+                    message = "User with id $id was not found"
+                )
+            }
+
+            ServerResponse.ok(data = result, message = "Processed successfully")
         }
     }
 
-    override suspend fun getUserByUsername(username: String): APIResponse<UserDto?> {
+    override suspend fun getExistingUserById(id: String): APIResponse<UserDto?> {
         return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.getUserByUsername(username), message = "Processed successfully")
+            val result = repository.getExistingUserById(id)
+
+            if (result == null) {
+                return@withContext ServerResponse.notFound(
+                    message = "User with id $id was not found"
+                )
+            }
+
+            ServerResponse.ok(data = result, message = "Processed successfully")
         }
     }
 
-    override suspend fun getUserByEmail(email: String): APIResponse<UserDto?> {
+    override suspend fun updateUser(dto: UpdateUserDto): APIResponse<UserDto?> {
         return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.getUserByEmail(email), message = "Processed successfully")
+            val result = repository.updateUser(dto)
+
+            if (result == null) {
+                return@withContext ServerResponse.notFound(
+                    message = "Unable to update user, try again later"
+                )
+            }
+
+            ServerResponse.accepted(data = result, message = "Processed successfully")
         }
     }
 
-    override suspend fun updateUser(dto: UserDto): APIResponse<UserDto?> {
+    override suspend fun softDeleteUser(id: String): APIResponse<String> {
         return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.updateUser(dto), message = "Processed successfully")
+            val result = repository.softDeleteUser(id)
+
+            if (result != null) {
+                return@withContext ServerResponse.badRequest(
+                    message = "Unable to delete user, try again later"
+                )
+            }
+
+            ServerResponse.ok(data = "User deleted!", message = "Processed successfully")
         }
     }
 
-    override suspend fun softDeleteUser(id: String): APIResponse<UserDto?> {
+    override suspend fun deleteUser(id: String): APIResponse<String> {
         return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.softDeleteUser(id), message = "Processed successfully")
-        }
-    }
+            val result = repository.softDeleteUser(id)
 
-    override suspend fun deleteUser(id: String): APIResponse<UserDto?> {
-        return withContext(coroutineContext) {
-            ServerResponse.ok(data = repository.deleteUser(id), message = "Processed successfully")
+            if (result != null) {
+                return@withContext ServerResponse.badRequest(
+                    message = "Unable to delete user, try again later"
+                )
+            }
+
+            ServerResponse.ok(data = "User deleted!", message = "Processed successfully")
         }
     }
 }

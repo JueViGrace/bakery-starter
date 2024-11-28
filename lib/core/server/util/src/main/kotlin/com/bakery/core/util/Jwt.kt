@@ -46,9 +46,6 @@ class Jwt(
             .sign(Algorithm.HMAC256(secret))
     }
 
-    fun extractRole(credential: JWTCredential): String? =
-        credential.payload.getClaim("user_claims").asMap()["role"]?.toString()
-
     fun extractId(credential: JWTCredential): String? =
         credential.payload.getClaim("user_claims").asMap()["user_id"]?.toString()
 
@@ -56,7 +53,6 @@ class Jwt(
         return when {
             !credential.payload.claims.containsKey("user_claims") -> null
             credential.payload.claims["user_id"]?.isNull == true -> null
-            credential.payload.claims["role"]?.isNull == true -> null
             !credential.payload.audience.contains(audience) || credential.payload.audience.size > 1 -> null
             credential.payload.issuer != issuer -> null
             credential.payload.subject == null -> null
@@ -80,15 +76,13 @@ class Jwt(
 
         if (
             claims == null ||
-            claims["user_id"]?.toString().isNullOrEmpty() ||
-            claims["role"]?.toString().isNullOrEmpty()
+            claims["user_id"]?.toString().isNullOrEmpty()
         ) {
             return null
         }
 
         return Token(
             userId = claims["user_id"].toString(),
-            role = claims["role"].toString()
         )
     }
 }

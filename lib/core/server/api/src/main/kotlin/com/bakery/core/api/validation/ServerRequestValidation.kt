@@ -4,7 +4,7 @@ import com.bakery.auth.validation.authValidation
 import com.bakery.user.validation.userValidation
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
 
-fun RequestValidationConfig.serverValidation() {
+fun RequestValidationConfig.serverRequestValidation() {
     authValidation()
     userValidation()
 }

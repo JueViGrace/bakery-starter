@@ -1,4 +1,4 @@
-package com.bakery.server.di
+package com.bakery.core.api.di
 
 import com.bakery.auth.di.authModule
 import com.bakery.user.di.userModule

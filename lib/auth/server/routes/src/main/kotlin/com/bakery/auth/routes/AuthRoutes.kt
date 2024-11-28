@@ -20,7 +20,6 @@ fun Route.authRoutes() {
     val handler: AuthHandler by inject<AuthHandler>()
 
     route("/auth") {
-        // todo: set refresh cookie
         post("/signIn") {
             val body = call.receive<SignInDto>()
             val response = handler.signIn(body)

@@ -11,6 +11,7 @@ import com.bakery.core.types.ServerResponse
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
+//todo: check for conflicts
 interface AuthHandler {
     suspend fun signIn(dto: SignInDto): APIResponse<AuthDto?>
     suspend fun signUp(dto: SignUpDto): APIResponse<AuthDto?>

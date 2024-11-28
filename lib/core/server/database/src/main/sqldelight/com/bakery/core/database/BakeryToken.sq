@@ -27,3 +27,7 @@ UPDATE bakery_token SET
     token = :token
 WHERE user_id = :id
 RETURNING *;
+
+delete:
+DELETE FROM bakery_token
+WHERE user_id = :id;

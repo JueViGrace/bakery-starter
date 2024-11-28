@@ -5,6 +5,7 @@ import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+// todo: improve
 @Serializable
 sealed class APIResponse<out T> {
     @Serializable
@@ -73,12 +74,22 @@ object ServerResponse {
         )
     }
 
-    fun badRequest(message: String? = null): APIResponse<Nothing> {
-        return APIResponse.Failure(
-            status = HttpStatusCode.BadRequest.value,
-            description = HttpStatusCode.BadRequest.description,
-            message = message
-        )
+    inline fun<reified T> badRequest(data: T? = null, message: String? = null): APIResponse<T> {
+        return if (data != null) {
+            APIResponse.Success(
+                status = HttpStatusCode.BadRequest.value,
+                description = HttpStatusCode.BadRequest.description,
+                data = data,
+                message = message
+            )
+        } else {
+            APIResponse.Failure(
+                status = HttpStatusCode.BadRequest.value,
+                description = HttpStatusCode.BadRequest.description,
+                data = data,
+                message = message
+            )
+        }
     }
 
     fun unauthorized(message: String? = null): APIResponse<Nothing> {
@@ -97,12 +108,22 @@ object ServerResponse {
         )
     }
 
-    fun notFound(message: String? = null): APIResponse<Nothing> {
-        return APIResponse.Failure(
-            status = HttpStatusCode.NotFound.value,
-            description = HttpStatusCode.NotFound.description,
-            message = message
-        )
+    inline fun <reified T> notFound(data: T? = null, message: String? = null): APIResponse<T> {
+        return if (data != null) {
+            APIResponse.Success(
+                status = HttpStatusCode.NotFound.value,
+                description = HttpStatusCode.NotFound.description,
+                data = data,
+                message = message
+            )
+        } else {
+            APIResponse.Failure(
+                status = HttpStatusCode.NotFound.value,
+                description = HttpStatusCode.NotFound.description,
+                data = data,
+                message = message
+            )
+        }
     }
 
     fun methodNotAllowed(message: String? = null): APIResponse<Nothing> {

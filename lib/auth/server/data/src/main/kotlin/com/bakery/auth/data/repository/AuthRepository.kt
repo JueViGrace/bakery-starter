@@ -20,7 +20,7 @@ interface AuthRepository {
     suspend fun signUp(dto: SignUpDto): AuthDto?
     suspend fun refresh(dto: RefreshTokenDto): AuthDto?
     suspend fun forgotPassword(dto: ForgotPasswordDto): AuthDto?
-    suspend fun saveToken(userId: String, userRole: String): AuthDto?
+    suspend fun saveToken(userId: String): AuthDto?
 }
 
 class DefaultAuthRepository(
@@ -61,7 +61,6 @@ class DefaultAuthRepository(
 
         return saveToken(
             userId = dbUser.id,
-            userRole = dbUser.role
         )
     }
 
@@ -80,10 +79,10 @@ class DefaultAuthRepository(
 
         return saveToken(
             userId = dbUser.id,
-            userRole = dbUser.role
         )
     }
 
+    // todo: delete old token?
     override suspend fun refresh(dto: RefreshTokenDto): AuthDto? {
         val token = jwt.verifyToken(dto.refreshToken)
         if (token == null) {
@@ -92,7 +91,6 @@ class DefaultAuthRepository(
 
         return saveToken(
             userId = token.userId,
-            userRole = token.role
         )
     }
 
@@ -102,18 +100,15 @@ class DefaultAuthRepository(
 
     override suspend fun saveToken(
         userId: String,
-        userRole: String,
     ): AuthDto? {
         val accessToken = jwt.createAccessToken(
             claims = mapOf(
                 "user_id" to userId,
-                "role" to userRole
             )
         )
         val refreshToken = jwt.createRefreshToken(
             claims = mapOf(
                 "user_id" to userId,
-                "role" to userRole
             )
         )
 
