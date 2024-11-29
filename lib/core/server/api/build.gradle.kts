@@ -27,6 +27,9 @@ dependencies {
     // Product
     implementation(projects.lib.product.server)
 
+    // Order
+    implementation(projects.lib.order.server)
+
     // Server
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.serialization.kotlinx.json)

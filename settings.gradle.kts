@@ -54,8 +54,19 @@ include(":lib:user:shared:types")
 // user server
 include(":lib:user:server")
 
+// user client
+
+
 // product library
 include(":lib:product:shared:types")
 
 // product server
 include(":lib:product:server")
+
+// product client
+
+// order library
+include(":lib:order:shared:types")
+
+// order server
+include(":lib:order:server")
