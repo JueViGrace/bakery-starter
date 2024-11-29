@@ -19,14 +19,13 @@ dependencies {
     implementation(projects.lib.core.server.database)
 
     // Auth
-    implementation(projects.lib.auth.server.routes)
-    implementation(projects.lib.auth.server.validation)
-    implementation(projects.lib.auth.server.di)
+    implementation(projects.lib.auth.server)
 
     // User
-    implementation(projects.lib.user.server.routes)
-    implementation(projects.lib.user.server.validation)
-    implementation(projects.lib.user.server.di)
+    implementation(projects.lib.user.server)
+
+    // Product
+    implementation(projects.lib.product.server)
 
     // Server
     implementation(libs.ktor.server.core)

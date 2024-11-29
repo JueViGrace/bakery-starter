@@ -71,6 +71,7 @@ RETURNING *;
 
 softDelete:
 UPDATE bakery_user SET
+    updated_at = CURRENT_TIMESTAMP,
     deleted_at = CURRENT_TIMESTAMP
 WHERE id = :id
 RETURNING *;

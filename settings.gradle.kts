@@ -46,16 +46,16 @@ include(":lib:auth:client:domain")
 include(":lib:auth:client:presentation")
 
 // auth server
-include(":lib:auth:server:data")
-include(":lib:auth:server:di")
-include(":lib:auth:server:routes")
-include(":lib:auth:server:validation")
+include(":lib:auth:server")
 
 // user library
 include(":lib:user:shared:types")
 
 // user server
-include(":lib:user:server:data")
-include(":lib:user:server:di")
-include(":lib:user:server:routes")
-include(":lib:user:server:validation")
+include(":lib:user:server")
+
+// product library
+include(":lib:product:shared:types")
+
+// product server
+include(":lib:product:server")

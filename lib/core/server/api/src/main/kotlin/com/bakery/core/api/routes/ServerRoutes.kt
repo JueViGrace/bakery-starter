@@ -1,6 +1,7 @@
 package com.bakery.core.api.routes
 
 import com.bakery.auth.routes.authRoutes
+import com.bakery.product.routes.productRoutes
 import com.bakery.user.routes.userRoutes
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
@@ -27,6 +28,7 @@ fun Route.apiRoutes() {
 
     authRoutes()
     userRoutes()
+    productRoutes()
 }
 
 fun Route.webRoutes() {
