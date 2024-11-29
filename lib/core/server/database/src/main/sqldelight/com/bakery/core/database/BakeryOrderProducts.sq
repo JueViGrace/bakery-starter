@@ -24,4 +24,4 @@ INSERT OR REPLACE INTO bakery_order_products(
     rating
 )
 VALUES ?
-RETUNING *;
+RETURNING *;

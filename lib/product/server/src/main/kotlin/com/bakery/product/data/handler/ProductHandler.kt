@@ -31,7 +31,7 @@ class DefaultProductHandler(
             if (result.isEmpty()) {
                 return@withContext ServerResponse.notFound(
                     data = result,
-                    message = "Products were not found."
+                    message = "Products were not found"
                 )
             }
 
@@ -48,7 +48,7 @@ class DefaultProductHandler(
 
             if (result == null) {
                 return@withContext ServerResponse.notFound(
-                    message = "Products with id $id was not found."
+                    message = "Products with id $id was not found"
                 )
             }
 
@@ -66,7 +66,7 @@ class DefaultProductHandler(
             if (result.isEmpty()) {
                 return@withContext ServerResponse.notFound(
                     data = result,
-                    message = "Products were not found."
+                    message = "Products were not found"
                 )
             }
 
@@ -83,7 +83,7 @@ class DefaultProductHandler(
 
             if (result == null) {
                 return@withContext ServerResponse.notFound(
-                    message = "Products with id $id was not found."
+                    message = "Products with id $id was not found"
                 )
             }
 
@@ -103,7 +103,7 @@ class DefaultProductHandler(
 
             if (result == null) {
                 return@withContext ServerResponse.notFound(
-                    message = "Unable to create product, try again later."
+                    message = "Unable to create product, try again later"
                 )
             }
 
@@ -123,7 +123,7 @@ class DefaultProductHandler(
 
             if (result == null) {
                 return@withContext ServerResponse.notFound(
-                    message = "Unable to update product, try again later."
+                    message = "Unable to update product, try again later"
                 )
             }
 
@@ -140,7 +140,7 @@ class DefaultProductHandler(
 
             if (result != null) {
                 return@withContext ServerResponse.notFound(
-                    message = "Unable to delete product, try again later."
+                    message = "Unable to delete product, try again later"
                 )
             }
 

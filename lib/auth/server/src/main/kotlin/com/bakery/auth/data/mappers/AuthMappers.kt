@@ -1,12 +1,14 @@
 package com.bakery.auth.data.mappers
 
 import com.bakery.auth.shared.types.SignUpDto
+import com.bakery.core.database.Bakery_user
 import com.bakery.core.shared.types.Constants
 import com.bakery.core.types.Role
 import com.bakery.core.util.Kbcrypt
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
-import com.bakery.core.database.Bakery_user as BakeryUser
+
+typealias BakeryUser = Bakery_user
 
 @OptIn(ExperimentalUuidApi::class)
 fun SignUpDto.toDb(): BakeryUser = BakeryUser(

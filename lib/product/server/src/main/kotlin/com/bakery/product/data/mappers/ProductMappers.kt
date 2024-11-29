@@ -8,7 +8,9 @@ import kotlin.text.split
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-fun Bakery_product.toDto(): ProductDto = ProductDto(
+typealias BakeryProduct = Bakery_product
+
+fun BakeryProduct.toDto(): ProductDto = ProductDto(
     id = id,
     name = name,
     description = description,
@@ -22,7 +24,7 @@ fun Bakery_product.toDto(): ProductDto = ProductDto(
 )
 
 @OptIn(ExperimentalUuidApi::class)
-fun CreateProductDto.toDb(images: List<String>): Bakery_product = Bakery_product(
+fun CreateProductDto.toDb(images: List<String>): BakeryProduct = BakeryProduct(
     id = Uuid.random().toString(),
     name = name,
     description = description,

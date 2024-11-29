@@ -29,7 +29,7 @@ ON bakery_product.id = bakery_order_products.product_id;
 findOneWithLines:
 SELECT *
 FROM bakery_order
-LEFT JOIN bakery_order_with_products
+LEFT JOIN bakery_order_products
 ON bakery_order.id = bakery_order_products.order_id
 LEFT JOIN bakery_product
 ON bakery_product.id = bakery_order_products.product_id

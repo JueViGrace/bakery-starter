@@ -1,7 +1,9 @@
 package com.bakery.user.data.mappers
 
+import com.bakery.core.database.Bakery_user
 import com.bakery.user.shared.types.UserDto
-import com.bakery.core.database.Bakery_user as BakeryUser
+
+typealias BakeryUser = Bakery_user
 
 fun BakeryUser.toDto(): UserDto = UserDto(
     id = id,
