@@ -96,7 +96,7 @@ class DefaultUserHandler(
 
     override suspend fun deleteUser(id: String): APIResponse<String> {
         return withContext(coroutineContext) {
-            val result = store.softDeleteUser(id)
+            val result = store.deleteUser(id)
 
             if (result != null) {
                 return@withContext ServerResponse.badRequest(

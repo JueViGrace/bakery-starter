@@ -1,8 +1,9 @@
-package com.bakery.app.di
+package com.bakery.core.di
 
 import org.koin.core.module.Module
 
 fun appModule(): List<Module> = listOf(
     databaseModule(),
-    ktorModule()
+    ktorModule(),
+    stateModule(),
 )

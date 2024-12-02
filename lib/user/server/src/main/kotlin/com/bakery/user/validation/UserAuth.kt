@@ -2,12 +2,16 @@ package com.bakery.user.validation
 
 import com.bakery.core.types.UserIdValidation
 import com.bakery.core.util.Jwt
+import com.bakery.user.shared.types.UpdateUserDto
 import com.bakery.user.shared.types.UserByIdDto
 import io.ktor.server.auth.AuthenticationConfig
 import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.jwt.jwt
 import io.ktor.server.request.receive
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 
+@OptIn(ExperimentalSerializationApi::class)
 fun AuthenticationConfig.userAuth(
     name: String,
     jwt: Jwt,
@@ -36,10 +40,17 @@ fun AuthenticationConfig.userAuth(
                     return@validateCredential JWTPrincipal(credential.payload)
                 }
 
-                val idParam = receive<UserByIdDto>()
-
-                if (user.userId != idParam.id) {
-                    return@validateCredential null
+                when (val body: Any = Json.decodeFromString(receive<String>())) {
+                    is UserByIdDto -> {
+                        if (user.userId != body.id) {
+                            return@validateCredential null
+                        }
+                    }
+                    is UpdateUserDto -> {
+                        if (body.id != user.userId) {
+                            return@validateCredential null
+                        }
+                    }
                 }
 
                 JWTPrincipal(credential.payload)

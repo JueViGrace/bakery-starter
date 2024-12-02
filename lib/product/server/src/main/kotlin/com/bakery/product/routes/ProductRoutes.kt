@@ -28,8 +28,9 @@ fun Route.productRoutes() {
     val handler by inject<ProductHandler>()
 
     route("/products") {
-        route("/admin") {
-            authenticate(JwtAuthName.ADMIN.value, strategy = AuthenticationStrategy.Required) {
+        // Product admin routes
+        authenticate(JwtAuthName.ADMIN.value, strategy = AuthenticationStrategy.Required) {
+            route("/admin") {
                 get {
                     val response = handler.getProducts()
 

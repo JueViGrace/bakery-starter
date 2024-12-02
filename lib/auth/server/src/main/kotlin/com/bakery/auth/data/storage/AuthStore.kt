@@ -68,7 +68,11 @@ class DefaultAuthStore(
         val dbUser = scope.async {
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
-                    db.bakeryUserQueries.insert(dto.toDb()).executeAsOneOrNull()
+                    val user = db.bakeryUserQueries.insert(dto.toDb()).executeAsOneOrNull()
+                    if (user == null) {
+                        return@transactionWithResult rollback(null)
+                    }
+                    user
                 }
             }
         }.await()

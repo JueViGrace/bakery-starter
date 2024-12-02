@@ -50,7 +50,7 @@ class DefaultUserStorage(
         return scope.async {
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
-                    db.bakeryUserQueries
+                    val user = db.bakeryUserQueries
                         .update(
                             first_name = dto.firstName,
                             last_name = dto.lastName,
@@ -61,6 +61,10 @@ class DefaultUserStorage(
                             id = dto.id
                         ).executeAsOneOrNull()
                         ?.toDto()
+                    if (user == null) {
+                        return@transactionWithResult rollback(null)
+                    }
+                    user
                 }
             }
         }.await()
@@ -71,7 +75,11 @@ class DefaultUserStorage(
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     db.bakeryTokenQueries.delete(id)
-                    db.bakeryUserQueries.softDelete(id).executeAsOneOrNull()?.toDto()
+                    val user = db.bakeryUserQueries.softDelete(id).executeAsOneOrNull()?.toDto()
+                    if (user != null) {
+                        return@transactionWithResult rollback(user)
+                    }
+                    null
                 }
             }
         }.await()
@@ -81,7 +89,11 @@ class DefaultUserStorage(
         return scope.async {
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
-                    db.bakeryUserQueries.deleteById(id).executeAsOneOrNull()?.toDto()
+                    val user = db.bakeryUserQueries.deleteById(id).executeAsOneOrNull()?.toDto()
+                    if (user != null) {
+                        return@transactionWithResult rollback(user)
+                    }
+                    null
                 }
             }
         }.await()

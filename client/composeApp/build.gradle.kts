@@ -42,11 +42,8 @@ kotlin {
             // Di: core
             implementation(projects.lib.core.shared.di)
 
-            // Api: client
-            implementation(projects.lib.core.client.api)
-
-            // Database: client
-            implementation(projects.lib.core.client.database)
+            // Di: client
+            implementation(projects.lib.core.client.di)
 
             // Presentation: client
             implementation(projects.lib.core.client.presentation)

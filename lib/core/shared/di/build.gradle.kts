@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
-group = "com.bakery.core.di"
+group = "com.bakery.core.shared.di"
 
 kotlin {
     androidTarget {
@@ -36,7 +36,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.bakery.core.di"
+    namespace = "com.bakery.core.shared.di"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

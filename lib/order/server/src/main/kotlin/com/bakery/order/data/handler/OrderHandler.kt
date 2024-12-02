@@ -11,11 +11,9 @@ import kotlin.coroutines.CoroutineContext
 
 interface OrderHandler {
     suspend fun getOrders(): APIResponse<List<OrderDto>>
-    suspend fun getOrdersWithLines(): APIResponse<List<OrderDto>>
-    suspend fun getOrder(id: String): APIResponse<OrderDto?>
     suspend fun getOrderWithLines(id: String): APIResponse<OrderDto?>
     suspend fun getOrdersByUser(userId: String): APIResponse<List<OrderDto>>
-    suspend fun getOrdersByUserWithLines(userId: String): APIResponse<List<OrderDto>>
+    suspend fun getOrderByUserWithLines(orderId: String, userId: String): APIResponse<OrderDto?>
     suspend fun createOrder(dto: CreateOrderDto): APIResponse<OrderDto?>
     suspend fun updateOrderStatus(dto: UpdateOrderDto): APIResponse<OrderDto?>
 }
@@ -31,40 +29,6 @@ class DefaultOrderHandler(
             if (result.isEmpty()) {
                 return@withContext ServerResponse.notFound(
                     message = "No orders were found"
-                )
-            }
-
-            ServerResponse.ok(
-                data = result,
-                message = "Processed successfully"
-            )
-        }
-    }
-
-    override suspend fun getOrdersWithLines(): APIResponse<List<OrderDto>> {
-        return withContext(coroutineContext) {
-            val result = storage.getOrdersWithLines()
-
-            if (result.isEmpty()) {
-                return@withContext ServerResponse.notFound(
-                    message = "No orders were found"
-                )
-            }
-
-            ServerResponse.ok(
-                data = result,
-                message = "Processed successfully"
-            )
-        }
-    }
-
-    override suspend fun getOrder(id: String): APIResponse<OrderDto?> {
-        return withContext(coroutineContext) {
-            val result = storage.getOrder(id)
-
-            if (result == null) {
-                return@withContext ServerResponse.notFound(
-                    message = "Order with id $id was not found"
                 )
             }
 
@@ -109,13 +73,16 @@ class DefaultOrderHandler(
         }
     }
 
-    override suspend fun getOrdersByUserWithLines(userId: String): APIResponse<List<OrderDto>> {
+    override suspend fun getOrderByUserWithLines(
+        orderId: String,
+        userId: String,
+    ): APIResponse<OrderDto?> {
         return withContext(coroutineContext) {
-            val result = storage.getOrdersByUserWithLines(userId)
+            val result = storage.getOrderByUserWithLines(orderId, userId)
 
-            if (result.isEmpty()) {
+            if (result == null) {
                 return@withContext ServerResponse.notFound(
-                    message = "No orders were found"
+                    message = "Order with id $orderId was not found"
                 )
             }
 

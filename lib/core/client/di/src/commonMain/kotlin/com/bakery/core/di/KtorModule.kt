@@ -1,4 +1,4 @@
-package com.bakery.app.di
+package com.bakery.core.di
 
 import com.bakery.core.api.KtorClient
 import org.koin.core.module.Module

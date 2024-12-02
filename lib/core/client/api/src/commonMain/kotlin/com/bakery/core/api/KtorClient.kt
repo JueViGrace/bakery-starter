@@ -1,7 +1,7 @@
 package com.bakery.core.api
 
-import com.bakery.core.types.ApiOperation
 import com.bakery.core.shared.types.DataError
+import com.bakery.core.types.ApiOperation
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO

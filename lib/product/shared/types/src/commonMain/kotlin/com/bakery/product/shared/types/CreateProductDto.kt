@@ -15,6 +15,8 @@ data class CreateProductDto(
     val price: Double,
     @SerialName("stock")
     val stock: Int,
+    @SerialName("issued")
+    val issued: String,
     @SerialName("hasStock")
     val hasStock: Boolean,
     @SerialName("discount")

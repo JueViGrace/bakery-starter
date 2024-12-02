@@ -64,12 +64,16 @@ class DefaultProductStorage(
         return scope.async {
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
-                    db.bakeryProductQueries
+                    val product = db.bakeryProductQueries
                         .insert(
                             bakery_product = dto.toDb(images)
                         )
                         .executeAsOneOrNull()
                         ?.toDto()
+                    if (product == null) {
+                        return@transactionWithResult rollback(null)
+                    }
+                    product
                 }
             }
         }.await()
@@ -79,13 +83,14 @@ class DefaultProductStorage(
         return scope.async {
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
-                    db.bakeryProductQueries
+                    val product = db.bakeryProductQueries
                         .update(
                             name = dto.name,
                             description = dto.description,
                             category = dto.category,
                             price = dto.price,
                             stock = dto.stock.toLong(),
+                            issued = dto.issued.toLong(),
                             has_stock = if (dto.hasStock) 1 else 0,
                             discount = dto.discount,
                             rating = dto.rating,
@@ -94,6 +99,10 @@ class DefaultProductStorage(
                         )
                         .executeAsOneOrNull()
                         ?.toDto()
+                    if (product == null) {
+                        return@transactionWithResult rollback(null)
+                    }
+                    product
                 }
             }
         }.await()
@@ -103,7 +112,11 @@ class DefaultProductStorage(
         return scope.async {
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
-                    db.bakeryProductQueries.softDelete(id).executeAsOneOrNull()?.toDto()
+                    val product = db.bakeryProductQueries.softDelete(id).executeAsOneOrNull()?.toDto()
+                    if (product != null) {
+                        return@transactionWithResult rollback(product)
+                    }
+                    null
                 }
             }
         }.await()
@@ -113,7 +126,11 @@ class DefaultProductStorage(
         return scope.async {
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
-                    db.bakeryProductQueries.delete(id).executeAsOneOrNull()?.toDto()
+                    val product = db.bakeryProductQueries.delete(id).executeAsOneOrNull()?.toDto()
+                    if (product != null) {
+                        return@transactionWithResult rollback(product)
+                    }
+                    null
                 }
             }
         }.await()

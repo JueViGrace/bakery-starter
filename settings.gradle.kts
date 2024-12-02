@@ -23,6 +23,7 @@ include(":lib")
 // core client library
 include(":lib:core:client:api")
 include(":lib:core:client:database")
+include(":lib:core:client:di")
 include(":lib:core:client:presentation")
 include(":lib:core:client:resources")
 include(":lib:core:client:types")
