@@ -1,9 +1,9 @@
 package com.bakery.core.api
 
-import com.bakery.core.shared.types.DataError
-import com.bakery.core.types.ApiOperation
+import com.bakery.core.types.response.APIResponse
+import com.bakery.core.types.response.ApiOperation
+import com.bakery.core.types.errors.DataError
 import io.ktor.client.HttpClient
-import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -11,7 +11,6 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
-import io.ktor.client.request.get
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
@@ -46,14 +45,14 @@ class KtorClient {
         }
     }
 
-    // todo: improve
-    suspend inline fun<reified T> call(url: String): ApiOperation<T> {
+    suspend inline fun<reified T> call(callBack: KtorClient.() -> APIResponse<T>): ApiOperation<T> {
         return try {
-            val data = client().get(url)
+            val data = callBack()
 
-            when (data.status.value) {
+            // todo: handle errors properly
+            when (data.status) {
                 HttpStatusCode.OK.value -> {
-                    ApiOperation.Success(data = data.body())
+                    ApiOperation.Success(data = data)
                 }
                 HttpStatusCode.BadRequest.value -> {
                     ApiOperation.Failure(error = DataError.BadRequest())

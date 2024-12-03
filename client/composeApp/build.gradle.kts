@@ -39,6 +39,18 @@ kotlin {
         }
 
         commonMain.dependencies {
+            // Types: core
+            implementation(projects.lib.core.shared.types)
+
+            // Types: client
+            implementation(projects.lib.core.client.types)
+
+            // Api: client
+            implementation(projects.lib.core.client.api)
+
+            // Database: client
+            implementation(projects.lib.core.client.database)
+
             // Di: core
             implementation(projects.lib.core.shared.di)
 
@@ -47,6 +59,15 @@ kotlin {
 
             // Presentation: client
             implementation(projects.lib.core.client.presentation)
+
+            // Resources: client
+            implementation(projects.lib.core.client.resources)
+
+            // Auth
+            implementation(projects.lib.auth.client)
+
+            // Auth: types
+            implementation(projects.lib.auth.shared.types)
 
             // Compose
             implementation(compose.runtime)

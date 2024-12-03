@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS bakery_user(
     name TEXT NOT NULL,
     lastname TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL,
     birth_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     phone TEXT NOT NULL,
     role TEXT NOT NULL DEFAULT 'user',

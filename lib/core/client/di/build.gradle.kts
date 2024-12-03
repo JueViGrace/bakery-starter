@@ -32,6 +32,9 @@ kotlin {
             // Database: client
             implementation(projects.lib.core.client.database)
 
+            // Presentation: client
+            implementation(projects.lib.core.client.presentation)
+
             // State handle
             implementation(libs.androidx.lifecycle.viewmodel.savedstate)
 
