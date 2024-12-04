@@ -88,6 +88,9 @@ kotlin {
             // Kotlinx
             implementation(libs.kotlinx.coroutines.core)
 
+            // Ktor: client
+            implementation(libs.ktor.client.core)
+
             // Koin
             implementation(libs.koin.core)
             implementation(libs.koin.compose)

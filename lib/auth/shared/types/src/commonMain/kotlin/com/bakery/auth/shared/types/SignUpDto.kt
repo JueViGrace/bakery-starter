@@ -23,4 +23,6 @@ data class SignUpDto(
     val address1: String,
     @SerialName("address2")
     val address2: String,
+    @SerialName("gender")
+    val gender: String,
 )

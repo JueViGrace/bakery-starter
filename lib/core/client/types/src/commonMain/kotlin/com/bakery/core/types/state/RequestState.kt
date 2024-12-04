@@ -8,14 +8,16 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
+import com.bakery.core.resources.resources.generated.resources.Res
+import com.bakery.core.resources.resources.generated.resources.unknown_error
+import com.bakery.core.types.errors.DataCodes
 import com.bakery.core.types.state.RequestState.Error
-import com.bakery.core.types.errors.DataError
 
 sealed class RequestState<out T> {
     data object Idle : RequestState<Nothing>()
     data object Loading : RequestState<Nothing>()
     data class Success<T>(val data: T) : RequestState<T>()
-    data class Error(val error: DataError) : RequestState<Nothing>()
+    data class Error(val error: DataCodes) : RequestState<Nothing>()
 
     fun isLoading() = this is Loading
     fun isSuccess() = this is Success
@@ -39,11 +41,14 @@ sealed class RequestState<out T> {
      * @throws ClassCastException If the current state is not [Error]
      *  */
     fun getErrorMessage() = (this as Error).error
-    fun getErrorMessageOrEmpty(): DataError {
+    fun getErrorMessageOrEmpty(): DataCodes {
         return try {
             (this as Error).error
         } catch (e: Exception) {
-            DataError.UnknownDataError(e.message)
+            DataCodes.UnknownError(
+                msg = Res.string.unknown_error,
+                err = e.message
+            )
         }
     }
 }
@@ -53,7 +58,7 @@ fun<T> RequestState<T>.DisplayResult(
     onIdle: (@Composable () -> Unit)? = null,
     onLoading: @Composable () -> Unit,
     onSuccess: @Composable (T) -> Unit,
-    onError: @Composable (DataError) -> Unit,
+    onError: @Composable (DataCodes) -> Unit,
     transitionSpec: AnimatedContentTransitionScope<*>.() -> ContentTransform = {
         fadeIn(tween(durationMillis = 300)) togetherWith
             fadeOut(tween(durationMillis = 300))

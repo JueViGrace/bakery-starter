@@ -22,6 +22,7 @@ fun SignUpDto.toDb(): BakeryUser = BakeryUser(
     birth_date = birthDate,
     address1 = address1,
     address2 = address2,
+    gender = gender,
     role = Role.USER.value,
     created_at = Constants.currentTime,
     updated_at = Constants.currentTime,

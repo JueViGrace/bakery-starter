@@ -22,7 +22,7 @@ fun AuthenticationConfig.serverAuthValidation(jwt: Jwt, dbHelper: DbHelper) {
             jwt.validateCredential(credential) {
                 extractId(credential)?.let { id ->
                     dbHelper.withDatabase { db ->
-                        executeOne(db.bakeryTokenQueries.findById(id))
+                        executeOne(db.bakeryTokenQueries.findTokenById(id))
                     }
                 } ?: return@validateCredential null
 
@@ -47,7 +47,7 @@ fun AuthenticationConfig.serverAuthValidation(jwt: Jwt, dbHelper: DbHelper) {
         },
         orderCall = { id ->
             val order = dbHelper.withDatabase { db ->
-                executeOne(db.bakeryOrderQueries.findOne(id))
+                executeOne(db.bakeryOrderQueries.findOrder(id))
             }
             if (order == null) {
                 return@ordersAuth null
@@ -70,7 +70,6 @@ fun AuthenticationConfig.serverAuthValidation(jwt: Jwt, dbHelper: DbHelper) {
                 val user = extractId(credential)?.let { id ->
                     getUser(id, dbHelper)
                 }
-
                 if (user == null) {
                     return@validateCredential null
                 }
@@ -88,7 +87,7 @@ fun AuthenticationConfig.serverAuthValidation(jwt: Jwt, dbHelper: DbHelper) {
 private suspend fun getUser(id: String, dbHelper: DbHelper): UserIdValidation? {
     val dbUser = dbHelper.withDatabase { db ->
         executeOne(
-            query = db.bakeryUserQueries.findOne(id)
+            query = db.bakeryUserQueries.findUser(id)
         )
     }
 

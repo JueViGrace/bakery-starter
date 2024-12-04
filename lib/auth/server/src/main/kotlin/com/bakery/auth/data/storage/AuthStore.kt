@@ -32,7 +32,7 @@ class DefaultAuthStore(
         return dbHelper.withDatabase { db ->
             db.transactionWithResult {
                 executeOne(
-                    query = db.bakeryUserQueries.findOneByUsername(username)
+                    query = db.bakeryUserQueries.findUserByUsername(username)
                 )
             }
         }
@@ -42,7 +42,7 @@ class DefaultAuthStore(
         return dbHelper.withDatabase { db ->
             db.transactionWithResult {
                 executeOne(
-                    query = db.bakeryUserQueries.findOneByEmail(email)
+                    query = db.bakeryUserQueries.findUserByEmail(email)
                 )
             }
         }

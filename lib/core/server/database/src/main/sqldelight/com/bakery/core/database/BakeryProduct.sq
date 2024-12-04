@@ -15,21 +15,21 @@ CREATE TABLE IF NOT EXISTS bakery_product(
     deleted_at TEXT DEFAULT NULL
 );
 
-findAll:
+findProducts:
 SELECT *
 FROM bakery_product;
 
-findOne:
+findProduct:
 SELECT *
 FROM bakery_product
 WHERE id = :id;
 
-findExisting:
+findExistingProducts:
 SELECT *
 FROM bakery_product
 WHERE deleted_at IS NULL;
 
-findExistingOne:
+findExistingProduct:
 SELECT *
 FROM bakery_product
 WHERE id = :id AND

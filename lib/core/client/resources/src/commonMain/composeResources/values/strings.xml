@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Bakery and Deserts</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="auth_no_data">No data found for this user.</string>
+    <string name="session_expired">Your session has expired, please log in.</string>
+    <string name="version_error">You have an outdated version of the app, please update to the latest version.</string>
+    <string name="server_error">Internal server error, try again later.</string>
+    <string name="unknown_error">An unknown error occurred, try again later.</string>
+    <string name="unexpected_error">An unexpected error occurred, try again later.</string>
 </resources>

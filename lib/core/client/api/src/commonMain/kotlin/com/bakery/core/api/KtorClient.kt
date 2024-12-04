@@ -1,8 +1,8 @@
 package com.bakery.core.api
 
+import com.bakery.core.shared.types.log
 import com.bakery.core.types.response.APIResponse
 import com.bakery.core.types.response.ApiOperation
-import com.bakery.core.types.errors.DataError
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.DefaultRequest
@@ -45,31 +45,23 @@ class KtorClient {
         }
     }
 
-    suspend inline fun<reified T> call(callBack: KtorClient.() -> APIResponse<T>): ApiOperation<T> {
+    suspend inline fun<reified T> call(callBack: suspend KtorClient.() -> APIResponse<T>): ApiOperation<T> {
         return try {
-            val data = callBack()
+            val body = callBack()
 
             // todo: handle errors properly
-            when (data.status) {
-                HttpStatusCode.OK.value -> {
-                    ApiOperation.Success(data = data)
-                }
-                HttpStatusCode.BadRequest.value -> {
-                    ApiOperation.Failure(error = DataError.BadRequest())
-                }
-                HttpStatusCode.NotFound.value -> {
-                    ApiOperation.Failure(error = DataError.NotFound())
-                }
+            when (body.status) {
                 HttpStatusCode.InternalServerError.value -> {
-                    ApiOperation.Failure(error = DataError.ServerDataError())
+                    ApiOperation.Failure(error = body.status)
                 }
                 else -> {
-                    ApiOperation.Failure(error = DataError.UnknownDataError())
+                    ApiOperation.Success(value = body)
                 }
             }
         } catch (e: Exception) {
             coroutineContext.ensureActive()
-            ApiOperation.Failure(error = DataError.UnexpectedDataError(e.message))
+            e.log("Network call exception")
+            ApiOperation.Failure(error = 600)
         }
     }
 }

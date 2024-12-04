@@ -2,8 +2,8 @@ package com.bakery.order.data.mappers
 
 import com.bakery.core.database.Bakery_order
 import com.bakery.core.database.Bakery_order_products
-import com.bakery.core.database.FindOneByUserWithLines
-import com.bakery.core.database.FindOneWithLines
+import com.bakery.core.database.FindOrderByUserWithLines
+import com.bakery.core.database.FindOrderWithLines
 import com.bakery.core.shared.types.Constants
 import com.bakery.core.types.OrderStatus
 import com.bakery.order.shared.types.CancelOrderDto
@@ -16,8 +16,8 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 private typealias DbOrder = Bakery_order
-private typealias OrderWithLines = FindOneWithLines
-private typealias OrderByUserWithLines = FindOneByUserWithLines
+private typealias OrderWithLines = FindOrderWithLines
+private typealias OrderByUserWithLines = FindOrderByUserWithLines
 private typealias OrderLines = Bakery_order_products
 
 fun DbOrder.orderLinesToDto(): OrderDto = OrderDto(

@@ -27,7 +27,7 @@ class DefaultProductStorage(
     override suspend fun getProducts(): List<ProductDto> {
         return dbHelper.withDatabase { db ->
             executeList(
-                query = db.bakeryProductQueries.findAll()
+                query = db.bakeryProductQueries.findProducts()
             ).map { product ->
                 product.toDto()
             }
@@ -37,7 +37,7 @@ class DefaultProductStorage(
     override suspend fun getProductById(id: String): ProductDto? {
         return dbHelper.withDatabase { db ->
             executeOne(
-                query = db.bakeryProductQueries.findOne(id)
+                query = db.bakeryProductQueries.findProduct(id)
             )?.toDto()
         }
     }
@@ -45,7 +45,7 @@ class DefaultProductStorage(
     override suspend fun getExistingProducts(): List<ProductDto> {
         return dbHelper.withDatabase { db ->
             executeList(
-                query = db.bakeryProductQueries.findExisting()
+                query = db.bakeryProductQueries.findExistingProducts()
             ).map { product ->
                 product.toDto()
             }
@@ -55,7 +55,7 @@ class DefaultProductStorage(
     override suspend fun getExistingProductById(id: String): ProductDto? {
         return dbHelper.withDatabase { db ->
             executeOne(
-                query = db.bakeryProductQueries.findExistingOne(id)
+                query = db.bakeryProductQueries.findExistingProduct(id)
             )?.toDto()
         }
     }

@@ -9,34 +9,35 @@ CREATE TABLE IF NOT EXISTS bakery_user(
     birth_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     address1 TEXT NOT NULL,
     address2 TEXT NOT NULL DEFAULT '',
+    gender TEXT NOT NULL,
     role TEXT NOT NULL DEFAULT 'user',
     created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     deleted_at TEXT DEFAULT NULL
 );
 
-findAll:
+findUsers:
 SELECT *
 FROM bakery_user;
 
-findOne:
+findUser:
 SELECT *
 FROM bakery_user
 WHERE id = :id;
 
-findExistingOne:
+findExistingUser:
 SELECT *
 FROM bakery_user
 WHERE id = :id AND
 deleted_at IS NULL;
 
-findOneByEmail:
+findUserByEmail:
 SELECT *
 FROM bakery_user
 WHERE email = :email AND
 deleted_at IS NULL;
 
-findOneByUsername:
+findUserByUsername:
 SELECT *
 FROM bakery_user
 WHERE username = :username AND
@@ -53,7 +54,8 @@ INSERT OR REPLACE INTO bakery_user(
     phone_number,
     birth_date,
     address1,
-    address2
+    address2,
+    gender
 ) VALUES ?
 RETURNING *;
 

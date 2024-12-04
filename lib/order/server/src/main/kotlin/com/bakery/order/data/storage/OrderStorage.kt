@@ -5,8 +5,8 @@ import com.bakery.core.database.BakerySvDb
 import com.bakery.core.database.helper.DbHelper
 import com.bakery.core.types.OrderStatus
 import com.bakery.order.data.mappers.orderByUserToDto
-import com.bakery.order.data.mappers.toDb
 import com.bakery.order.data.mappers.orderLinesToDto
+import com.bakery.order.data.mappers.toDb
 import com.bakery.order.shared.types.CreateOrderDetailsDto
 import com.bakery.order.shared.types.CreateOrderDto
 import com.bakery.order.shared.types.OrderDto
@@ -30,7 +30,7 @@ class DefaultOrderStorage(
     override suspend fun getOrders(): List<OrderDto> {
         return dbHelper.withDatabase { db ->
             dbHelper.executeList(
-                query = db.bakeryOrderQueries.findAll()
+                query = db.bakeryOrderQueries.findOrders()
             ).map { order ->
                 order.orderLinesToDto()
             }
@@ -40,7 +40,7 @@ class DefaultOrderStorage(
     override suspend fun getOrderWithLines(id: String): OrderDto? {
         return dbHelper.withDatabase { db ->
             dbHelper.executeList(
-                query = db.bakeryOrderQueries.findOneWithLines(id)
+                query = db.bakeryOrderQueries.findOrderWithLines(id)
             ).orderLinesToDto()
         }
     }
@@ -48,7 +48,7 @@ class DefaultOrderStorage(
     override suspend fun getOrdersByUser(userId: String): List<OrderDto> {
         return dbHelper.withDatabase { db ->
             dbHelper.executeList(
-                query = db.bakeryOrderQueries.findAllByUser(userId)
+                query = db.bakeryOrderQueries.findOrdersByUser(userId)
             ).map { order ->
                 order.orderLinesToDto()
             }
@@ -58,7 +58,7 @@ class DefaultOrderStorage(
     override suspend fun getOrderByUserWithLines(orderId: String, userId: String): OrderDto? {
         return dbHelper.withDatabase { db ->
             dbHelper.executeList(
-                query = db.bakeryOrderQueries.findOneByUserWithLines(
+                query = db.bakeryOrderQueries.findOrderByUserWithLines(
                     id = orderId,
                     user_id = userId
                 )
@@ -84,7 +84,7 @@ class DefaultOrderStorage(
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
                     val order = executeList(
-                        query = db.bakeryOrderQueries.findOneWithLines(dto.id)
+                        query = db.bakeryOrderQueries.findOrderWithLines(dto.id)
                     ).orderLinesToDto()
                     if (order == null) {
                         return@transactionWithResult rollback(null)
@@ -161,7 +161,7 @@ class DefaultOrderStorage(
     ) {
         val list = details.map { detail ->
             val product = db.bakeryProductQueries
-                .findOne(detail.productId)
+                .findProduct(detail.productId)
                 .executeAsOneOrNull()
 
             if (product == null) {
@@ -217,7 +217,7 @@ class DefaultOrderStorage(
 
         val list = order.details.map { detail ->
             val product = db.bakeryProductQueries
-                .findOne(detail.productId)
+                .findProduct(detail.productId)
                 .executeAsOneOrNull()
             if (product == null) {
                 return@map null
@@ -260,7 +260,7 @@ class DefaultOrderStorage(
 
         val list = order.details.map { detail ->
             val product = db.bakeryProductQueries
-                .findOne(detail.productId)
+                .findProduct(detail.productId)
                 .executeAsOneOrNull()
             if (product == null) {
                 return@map null

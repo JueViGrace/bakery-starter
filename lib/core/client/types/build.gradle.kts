@@ -29,12 +29,6 @@ kotlin {
             // Types: core
             implementation(projects.lib.core.shared.types)
 
-            // Api: client
-            implementation(projects.lib.core.client.api)
-
-            // Database: client
-            implementation(projects.lib.core.client.database)
-
             // Compose Resources
             implementation(projects.lib.core.client.resources)
 
@@ -49,6 +43,9 @@ kotlin {
 
             // Serialization
             implementation(libs.kotlinx.serialization.json)
+
+            // Reflect
+            implementation(libs.kotlin.reflect)
         }
 
         jvmMain.dependencies {

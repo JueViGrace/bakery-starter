@@ -23,7 +23,7 @@ class DefaultUserStorage(
     override suspend fun getUsers(): List<UserDto> {
         return dbHelper.withDatabase { db ->
             dbHelper.executeList(
-                query = db.bakeryUserQueries.findAll()
+                query = db.bakeryUserQueries.findUsers()
             ).map { user ->
                 user.toDto()
             }
@@ -33,7 +33,7 @@ class DefaultUserStorage(
     override suspend fun getUserById(id: String): UserDto? {
         return dbHelper.withDatabase { db ->
             dbHelper.executeOne(
-                query = db.bakeryUserQueries.findOne(id)
+                query = db.bakeryUserQueries.findUser(id)
             )?.toDto()
         }
     }
@@ -41,7 +41,7 @@ class DefaultUserStorage(
     override suspend fun getExistingUserById(id: String): UserDto? {
         return dbHelper.withDatabase { db ->
             dbHelper.executeOne(
-                query = db.bakeryUserQueries.findExistingOne(id)
+                query = db.bakeryUserQueries.findExistingUser(id)
             )?.toDto()
         }
     }

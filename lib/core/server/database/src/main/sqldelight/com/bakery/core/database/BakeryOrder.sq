@@ -9,16 +9,16 @@ CREATE TABLE IF NOT EXISTS bakery_order(
     FOREIGN KEY (user_id) REFERENCES bakery_user(id)
 );
 
-findAll:
+findOrders:
 SELECT *
 FROM bakery_order;
 
-findOne:
+findOrder:
 SELECT *
 FROM bakery_order
 WHERE id = :id;
 
-findOneWithLines:
+findOrderWithLines:
 SELECT *
 FROM bakery_order
 LEFT JOIN bakery_order_products
@@ -27,12 +27,12 @@ LEFT JOIN bakery_product
 ON bakery_product.id = bakery_order_products.product_id
 WHERE bakery_order.id = :id;
 
-findAllByUser:
+findOrdersByUser:
 SELECT *
 FROM bakery_order
 WHERE user_id = :id;
 
-findOneByUserWithLines:
+findOrderByUserWithLines:
 SELECT *
 FROM bakery_order
 LEFT JOIN bakery_order_products

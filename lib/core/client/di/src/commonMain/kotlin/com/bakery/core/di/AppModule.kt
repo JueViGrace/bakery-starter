@@ -2,8 +2,9 @@ package com.bakery.core.di
 
 import org.koin.core.module.Module
 
-fun appModule(): List<Module> = listOf(
+fun coreModule(): List<Module> = listOf(
     databaseModule(),
     ktorModule(),
+    coroutinesModule(),
     presentationModule(),
 )
