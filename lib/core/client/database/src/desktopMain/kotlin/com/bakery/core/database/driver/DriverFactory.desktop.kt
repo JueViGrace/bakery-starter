@@ -7,7 +7,7 @@ import com.bakery.core.database.BakeryCliDb
 
 actual class DriverFactory {
     actual suspend fun createDriver(): SqlDriver {
-        val driver = JdbcSqliteDriver("jdbc:sqlite:bakery_db")
+        val driver = JdbcSqliteDriver("jdbc:sqlite:bakery.db")
         BakeryCliDb.Schema.awaitCreate(driver)
         return driver
     }

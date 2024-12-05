@@ -5,7 +5,6 @@ import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// todo: improve
 @Serializable
 sealed class APIResponse<out T> {
     @Serializable
@@ -166,10 +165,11 @@ object ServerResponse {
         )
     }
 
-    fun internalServerError(message: String? = null): APIResponse<Nothing> {
+    fun internalServerError(data: String? = null, message: String? = null): APIResponse<Nothing> {
         return APIResponse.Failure(
             status = HttpStatusCode.InternalServerError.value,
             description = HttpStatusCode.InternalServerError.description,
+            data = data,
             message = message
         )
     }
@@ -182,142 +182,3 @@ object ServerResponse {
         )
     }
 }
-
-/*
-object ServerResponse {
-    inline fun <reified T>ok(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.OK.value,
-            description = HttpStatusCode.OK.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>created(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.Created.value,
-            description = HttpStatusCode.Created.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>accepted(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.Accepted.value,
-            description = HttpStatusCode.Accepted.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>noContent(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.NoContent.value,
-            description = HttpStatusCode.NoContent.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>badRequest(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.BadRequest.value,
-            description = HttpStatusCode.BadRequest.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>unauthorized(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.Unauthorized.value,
-            description = HttpStatusCode.Unauthorized.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>forbidden(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.Forbidden.value,
-            description = HttpStatusCode.Forbidden.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>notFound(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.NotFound.value,
-            description = HttpStatusCode.NotFound.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>methodNotAllowed(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.MethodNotAllowed.value,
-            description = HttpStatusCode.MethodNotAllowed.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>notAcceptable(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.NotAcceptable.value,
-            description = HttpStatusCode.NotAcceptable.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>requestTimeout(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.RequestTimeout.value,
-            description = HttpStatusCode.RequestTimeout.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>conflict(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.Conflict.value,
-            description = HttpStatusCode.Conflict.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>unsupportedMediaType(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.UnsupportedMediaType.value,
-            description = HttpStatusCode.UnsupportedMediaType.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>internalServerError(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.InternalServerError.value,
-            description = HttpStatusCode.InternalServerError.description,
-            data = data,
-            message = message
-        )
-    }
-
-    inline fun <reified T>serviceUnavailable(data: T? = null, message: String? = null): APIResponse<T> {
-        return APIResponse(
-            status = HttpStatusCode.ServiceUnavailable.value,
-            description = HttpStatusCode.ServiceUnavailable.description,
-            data = data,
-            message = message
-        )
-    }
-}
-*/

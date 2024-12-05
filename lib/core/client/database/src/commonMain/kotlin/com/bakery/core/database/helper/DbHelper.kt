@@ -6,15 +6,14 @@ import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOneOrNull
 import com.bakery.core.database.BakeryCliDb
 import com.bakery.core.database.driver.DriverFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlin.coroutines.CoroutineContext
 
 class DbHelper(
     private val driver: DriverFactory,
-    private val scope: CoroutineScope
+    private val coroutineContext: CoroutineContext
 ) {
     private var db: BakeryCliDb? = null
     private val mutex = Mutex()
@@ -31,27 +30,19 @@ class DbHelper(
         return BakeryCliDb(driver.createDriver())
     }
 
-    suspend fun <T : Any> executeOne(query: Query<T>): T? {
-        return scope.async {
-            query.executeAsOneOrNull()
-        }.await()
+    fun <T : Any> executeOne(query: Query<T>): T? {
+        return query.executeAsOneOrNull()
     }
 
-    suspend fun <T : Any> executeOneAsFlow(query: Query<T>): Flow<T?> {
-        return scope.async {
-            query.asFlow().mapToOneOrNull(coroutineContext)
-        }.await()
+    fun <T : Any> executeOneAsFlow(query: Query<T>): Flow<T?> {
+        return query.asFlow().mapToOneOrNull(coroutineContext)
     }
 
-    suspend fun <T : Any> executeList(query: Query<T>): List<T> {
-        return scope.async {
-            query.executeAsList()
-        }.await()
+    fun <T : Any> executeList(query: Query<T>): List<T> {
+        return query.executeAsList()
     }
 
-    suspend fun <T : Any> executeListAsFlow(query: Query<T>): Flow<List<T>> {
-        return scope.async {
-            query.asFlow().mapToList(coroutineContext)
-        }.await()
+    fun <T : Any> executeListAsFlow(query: Query<T>): Flow<List<T>> {
+        return query.asFlow().mapToList(coroutineContext)
     }
 }

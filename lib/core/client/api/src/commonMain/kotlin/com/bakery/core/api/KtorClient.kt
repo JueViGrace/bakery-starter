@@ -3,7 +3,9 @@ package com.bakery.core.api
 import com.bakery.core.shared.types.log
 import com.bakery.core.types.response.APIResponse
 import com.bakery.core.types.response.ApiOperation
+import com.bakery.core.types.state.AppCodes
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -11,8 +13,17 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
+import io.ktor.client.request.delete
+import io.ktor.client.request.get
+import io.ktor.client.request.headers
+import io.ktor.client.request.patch
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.client.utils.EmptyContent.contentType
+import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.ensureActive
 import kotlinx.serialization.json.Json
@@ -45,14 +56,15 @@ class KtorClient {
         }
     }
 
-    suspend inline fun<reified T> call(callBack: suspend KtorClient.() -> APIResponse<T>): ApiOperation<T> {
+    suspend inline fun<reified T> call(callBack: KtorClient.() -> APIResponse<T>): ApiOperation<T> {
         return try {
             val body = callBack()
-
-            // todo: handle errors properly
             when (body.status) {
                 HttpStatusCode.InternalServerError.value -> {
-                    ApiOperation.Failure(error = body.status)
+                    ApiOperation.Failure(error = AppCodes.InternalServerError)
+                }
+                HttpStatusCode.NotFound.value -> {
+                    ApiOperation.Failure(error = AppCodes.NotFound)
                 }
                 else -> {
                     ApiOperation.Success(value = body)
@@ -61,7 +73,79 @@ class KtorClient {
         } catch (e: Exception) {
             coroutineContext.ensureActive()
             e.log("Network call exception")
-            ApiOperation.Failure(error = 600)
+            ApiOperation.Failure(error = AppCodes.UnexpectedError)
         }
+    }
+
+    suspend inline fun<reified T> get(
+        urlString: String,
+        headers: Map<String, String> = emptyMap()
+    ): T {
+        return client()
+            .get(urlString = urlString) {
+                headers.forEach { (key, value) ->
+                    headers {
+                        append(key, value)
+                    }
+                }
+            }
+            .body<T>()
+    }
+
+    suspend inline fun<reified T, reified R> post(
+        urlString: String,
+        body: T,
+        headers: Map<String, String> = emptyMap(),
+        contentType: ContentType = ContentType.Application.Json
+    ): R {
+        return client()
+            .post(urlString = urlString) {
+                headers.forEach { (key, value) ->
+                    headers {
+                        append(key, value)
+                    }
+                }
+                contentType(contentType)
+                setBody(body)
+            }
+            .body<R>()
+    }
+
+    suspend inline fun <reified T, reified R> patch(
+        urlString: String,
+        body: T,
+        headers: Map<String, String> = emptyMap(),
+        contentType: ContentType = ContentType.Application.Json
+    ): R {
+        return client()
+            .patch(urlString = urlString) {
+                headers.forEach { (key, value) ->
+                    headers {
+                        append(key, value)
+                    }
+                }
+                contentType(contentType)
+                setBody(body)
+            }
+            .body<R>()
+    }
+
+    suspend inline fun <reified T, reified R> delete(
+        urlString: String,
+        body: T,
+        headers: Map<String, String> = emptyMap(),
+        contentType: ContentType = ContentType.Application.Json
+    ): R {
+        return client()
+            .delete(urlString = urlString) {
+                headers.forEach { (key, value) ->
+                    headers {
+                        append(key, value)
+                    }
+                }
+                contentType(contentType)
+                setBody(body)
+            }
+            .body<R>()
     }
 }

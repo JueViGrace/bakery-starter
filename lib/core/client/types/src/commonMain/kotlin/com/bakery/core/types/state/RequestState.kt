@@ -10,7 +10,6 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import com.bakery.core.resources.resources.generated.resources.Res
 import com.bakery.core.resources.resources.generated.resources.unknown_error
-import com.bakery.core.types.errors.DataCodes
 import com.bakery.core.types.state.RequestState.Error
 
 sealed class RequestState<out T> {
@@ -47,7 +46,7 @@ sealed class RequestState<out T> {
         } catch (e: Exception) {
             DataCodes.UnknownError(
                 msg = Res.string.unknown_error,
-                err = e.message
+                desc = e.message,
             )
         }
     }

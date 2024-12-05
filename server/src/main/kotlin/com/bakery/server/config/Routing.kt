@@ -29,7 +29,7 @@ fun Application.configureRouting() {
                 status = HttpStatusCode.InternalServerError,
                 message = internalServerError(
                     message = "Something unexpected happened, try again later."
-                )
+                ) as APIResponse.Failure
             )
         }
 
@@ -40,7 +40,7 @@ fun Application.configureRouting() {
                 message = badRequest(
                     data = cause.reasons.joinToString(", "),
                     message = "Invalid request."
-                )
+                ) as APIResponse.Failure
             )
         }
 
