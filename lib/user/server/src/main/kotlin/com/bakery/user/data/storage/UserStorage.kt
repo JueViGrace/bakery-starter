@@ -1,9 +1,9 @@
 package com.bakery.user.data.storage
 
 import com.bakery.core.database.helper.DbHelper
-import com.bakery.user.data.mappers.toDto
-import com.bakery.user.shared.types.UpdateUserDto
-import com.bakery.user.shared.types.UserDto
+import com.bakery.core.shared.types.user.UpdateUserDto
+import com.bakery.core.shared.types.user.UserDto
+import com.bakery.core.types.user.toDto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 

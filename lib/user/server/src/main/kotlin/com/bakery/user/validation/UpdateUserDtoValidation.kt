@@ -1,7 +1,7 @@
 package com.bakery.user.validation
 
+import com.bakery.core.shared.types.user.UpdateUserDto
 import com.bakery.core.util.Util.validUuid
-import com.bakery.user.shared.types.UpdateUserDto
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 
@@ -15,6 +15,9 @@ fun RequestValidationConfig.validateUpdateUserDto() {
             dto.birthDate.isEmpty() -> ValidationResult.Invalid("Birth date cannot be empty")
             dto.address1.isEmpty() -> ValidationResult.Invalid("Address 1 cannot be empty")
             dto.address2.isEmpty() -> ValidationResult.Invalid("Address 2 cannot be empty")
+            dto.gender.isEmpty() -> ValidationResult.Invalid("Gender cannot be empty")
+            dto.gender != "male" && dto.gender != "female" ->
+                ValidationResult.Invalid("Gender must be either male or female")
             else -> ValidationResult.Valid
         }
     }

@@ -8,11 +8,11 @@ sealed interface ApiOperation<out T> {
     data class Failure(val error: AppCodes) : ApiOperation<Nothing>
 }
 
-inline fun <reified T> ApiOperation<T>.display(
-    onSuccess: (APIResponse<T>) -> Unit,
-    onFailure: (DataCodes) -> Unit
-) {
-    when (this) {
+inline fun <reified T, reified R> ApiOperation<T>.display(
+    onSuccess: (APIResponse<T>) -> R,
+    onFailure: (DataCodes) -> R
+): R {
+    return when (this) {
         is ApiOperation.Success -> onSuccess(value)
         is ApiOperation.Failure -> onFailure(DataCodes.fromCode(error))
     }

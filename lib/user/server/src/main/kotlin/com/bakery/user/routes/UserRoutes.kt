@@ -3,8 +3,8 @@ package com.bakery.user.routes
 import com.bakery.core.types.JwtAuthName
 import com.bakery.core.types.applicationResponse
 import com.bakery.user.data.handler.UserHandler
-import com.bakery.user.shared.types.UpdateUserDto
-import com.bakery.user.shared.types.UserByIdDto
+import com.bakery.core.shared.types.user.UpdateUserDto
+import com.bakery.core.shared.types.user.UserByIdDto
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
 import io.ktor.server.auth.AuthenticationStrategy

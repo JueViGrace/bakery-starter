@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bakery.app.data.AppRepository
 import com.bakery.app.presentation.state.AppState
+import com.bakery.core.presentation.messages.Messages
 import com.bakery.core.presentation.navigation.Destination
 import com.bakery.core.presentation.navigation.Navigator
 import com.bakery.core.resources.resources.generated.resources.Res
@@ -17,12 +18,15 @@ import kotlinx.coroutines.flow.stateIn
 
 class AppViewModel(
     navigator: Navigator,
+    messages: Messages,
     appRepository: AppRepository,
 ) : ViewModel() {
+    val messages = messages.messages
+
     private var _state = MutableStateFlow(AppState())
     val state = combine(
         _state,
-        appRepository.validateSession()
+        appRepository.validateSession(),
     ) { state, session ->
         when (session) {
             is RequestState.Error -> {
@@ -38,7 +42,8 @@ class AppViewModel(
                 )
                 state.copy(
                     session = null,
-                    snackMessage = session.error.message
+                    snackMessage = session.error.message,
+                    description = session.error.description ?: ""
                 )
             }
             is RequestState.Success -> {
@@ -55,12 +60,14 @@ class AppViewModel(
                 state.copy(
                     session = session.data,
                     snackMessage = Res.string.welcome_back,
+                    description = session.data.user.firstName
                 )
             }
             else -> {
                 state.copy(
                     session = null,
-                    snackMessage = null
+                    snackMessage = null,
+                    description = ""
                 )
             }
         }

@@ -9,10 +9,7 @@ CREATE TABLE IF NOT EXISTS bakery_user(
     address1 TEXT NOT NULL,
     address2 TEXT NOT NULL DEFAULT '',
     gender TEXT NOT NULL,
-    role TEXT NOT NULL DEFAULT 'user',
-    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-    updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TEXT DEFAULT NULL
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
 findUsers:
@@ -36,9 +33,7 @@ INSERT OR REPLACE INTO bakery_user(
     address1,
     address2,
     gender,
-    created_at,
-    updated_at,
-    deleted_at
+    created_at
 ) VALUES ?
 RETURNING *;
 

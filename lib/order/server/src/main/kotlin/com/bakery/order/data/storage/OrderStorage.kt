@@ -3,14 +3,15 @@ package com.bakery.order.data.storage
 import app.cash.sqldelight.SuspendingTransactionWithReturn
 import com.bakery.core.database.BakerySvDb
 import com.bakery.core.database.helper.DbHelper
+import com.bakery.core.shared.types.order.CreateOrderDetailsDto
+import com.bakery.core.shared.types.order.CreateOrderDto
+import com.bakery.core.shared.types.order.OrderDto
+import com.bakery.core.shared.types.order.UpdateOrderDto
 import com.bakery.core.types.OrderStatus
-import com.bakery.order.data.mappers.orderByUserToDto
-import com.bakery.order.data.mappers.orderLinesToDto
-import com.bakery.order.data.mappers.toDb
-import com.bakery.order.shared.types.CreateOrderDetailsDto
-import com.bakery.order.shared.types.CreateOrderDto
-import com.bakery.order.shared.types.OrderDto
-import com.bakery.order.shared.types.UpdateOrderDto
+import com.bakery.core.types.order.orderByUserToDto
+import com.bakery.core.types.order.orderLinesToDto
+import com.bakery.core.types.order.toDb
+import com.bakery.core.types.order.toDbDetails
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 
@@ -87,7 +88,7 @@ class DefaultOrderStorage(
                         query = db.bakeryOrderQueries.findOrderWithLines(dto.id)
                     ).orderLinesToDto()
                     if (order == null) {
-                        return@transactionWithResult rollback(null)
+                        rollback(null)
                     }
 
                     // todo: product stock updates could be broke down into one or separate functions
@@ -108,13 +109,13 @@ class DefaultOrderStorage(
         db: BakerySvDb,
         dto: CreateOrderDto
     ): OrderDto {
-        val totalAmount = dto.details.map { detail ->
+        val totalAmount = dto.details.sumOf { detail ->
             calculateOrderTotalAmount(
                 quantity = detail.quantity,
                 price = detail.price,
                 discount = detail.discount
             )
-        }.sum()
+        }
 
         val order = db.bakeryOrderQueries
             .insert(
@@ -125,7 +126,7 @@ class DefaultOrderStorage(
             .executeAsOneOrNull()
             ?.orderLinesToDto()
         if (order == null) {
-            return rollback(null)
+            rollback(null)
         }
 
         return order
@@ -138,7 +139,7 @@ class DefaultOrderStorage(
     ) {
         val list = details.map { detail ->
             db.bakeryOrderProductsQueries.insert(
-                detail.toDb(
+                detail.toDbDetails(
                     orderId = orderId,
                     totalPrice = calculateOrderTotalAmount(
                         quantity = detail.quantity,
@@ -205,7 +206,7 @@ class DefaultOrderStorage(
     private fun SuspendingTransactionWithReturn<OrderDto?>.onOrderCancel(
         db: BakerySvDb,
         order: OrderDto
-    ): OrderDto? {
+    ): OrderDto {
         val updatedOrder = db.bakeryOrderQueries.updateStatus(
             status = OrderStatus.CANCELLED.value,
             id = order.id
@@ -248,14 +249,14 @@ class DefaultOrderStorage(
     private fun SuspendingTransactionWithReturn<OrderDto?>.onOrderDispatched(
         db: BakerySvDb,
         order: OrderDto
-    ): OrderDto? {
+    ): OrderDto {
         val updatedOrder = db.bakeryOrderQueries.updateStatus(
             status = OrderStatus.DISPATCHED.value,
             id = order.id
         )
             .executeAsOneOrNull()
         if (updatedOrder == null) {
-            return rollback(null)
+            rollback(null)
         }
 
         val list = order.details.map { detail ->
@@ -278,7 +279,7 @@ class DefaultOrderStorage(
             return@map updatedProduct
         }
         if (list.isEmpty() || list.contains(null)) {
-            return rollback(null)
+            rollback(null)
         }
 
         return updatedOrder.orderLinesToDto()
@@ -287,14 +288,14 @@ class DefaultOrderStorage(
     private fun SuspendingTransactionWithReturn<OrderDto?>.onOrderDelivered(
         db: BakerySvDb,
         orderId: String
-    ): OrderDto? {
+    ): OrderDto {
         val updatedOrder = db.bakeryOrderQueries.updateStatus(
             status = OrderStatus.DELIVERED.value,
             id = orderId
         )
             .executeAsOneOrNull()
         if (updatedOrder == null) {
-            return rollback(null)
+            rollback(null)
         }
         return updatedOrder.orderLinesToDto()
     }

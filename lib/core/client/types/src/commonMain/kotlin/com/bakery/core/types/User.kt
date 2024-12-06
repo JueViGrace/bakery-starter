@@ -11,6 +11,5 @@ data class User(
     val address1: String,
     val address2: String,
     val gender: String,
-    val role: String,
     val createdAt: String,
 )

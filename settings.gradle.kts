@@ -39,7 +39,6 @@ include(":lib:core:shared:di")
 include(":lib:core:shared:types")
 
 // auth library
-include(":lib:auth:shared:types")
 
 //  auth client
 include(":lib:auth:client")
@@ -48,7 +47,6 @@ include(":lib:auth:client")
 include(":lib:auth:server")
 
 // user library
-include(":lib:user:shared:types")
 
 // user server
 include(":lib:user:server")
@@ -57,7 +55,6 @@ include(":lib:user:server")
 
 
 // product library
-include(":lib:product:shared:types")
 
 // product server
 include(":lib:product:server")
@@ -66,7 +63,6 @@ include(":lib:product:server")
 
 
 // order library
-include(":lib:order:shared:types")
 
 // order server
 include(":lib:order:server")

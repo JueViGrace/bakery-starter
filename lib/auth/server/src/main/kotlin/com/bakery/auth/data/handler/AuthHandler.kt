@@ -1,11 +1,11 @@
 package com.bakery.auth.data.handler
 
 import com.bakery.auth.data.storage.AuthStore
-import com.bakery.auth.shared.types.AuthDto
-import com.bakery.auth.shared.types.ForgotPasswordDto
-import com.bakery.auth.shared.types.RefreshTokenDto
-import com.bakery.auth.shared.types.SignInDto
-import com.bakery.auth.shared.types.SignUpDto
+import com.bakery.core.shared.types.auth.AuthDto
+import com.bakery.core.shared.types.auth.ForgotPasswordDto
+import com.bakery.core.shared.types.auth.RefreshTokenDto
+import com.bakery.core.shared.types.auth.SignInDto
+import com.bakery.core.shared.types.auth.SignUpDto
 import com.bakery.core.types.APIResponse
 import com.bakery.core.types.ServerResponse
 import kotlinx.coroutines.withContext
@@ -26,12 +26,9 @@ class DefaultAuthHandler(
     override suspend fun signIn(dto: SignInDto): APIResponse<AuthDto?> {
         return withContext(coroutineContext) {
             val result = store.getValidUser(dto)
-
-            if (result == null) {
-                return@withContext ServerResponse.badRequest(
+                ?: return@withContext ServerResponse.badRequest(
                     message = "Invalid credentials"
                 )
-            }
 
             return@withContext ServerResponse.ok(
                 data = result,
@@ -43,12 +40,9 @@ class DefaultAuthHandler(
     override suspend fun signUp(dto: SignUpDto): APIResponse<AuthDto?> {
         return withContext(coroutineContext) {
             val result = store.signUp(dto)
-
-            if (result == null) {
-                return@withContext ServerResponse.badRequest(
+                ?: return@withContext ServerResponse.badRequest(
                     message = "Unable to create user, try again later."
                 )
-            }
 
             ServerResponse.created(
                 data = result,
@@ -60,12 +54,9 @@ class DefaultAuthHandler(
     override suspend fun refresh(dto: RefreshTokenDto): APIResponse<AuthDto?> {
         return withContext(coroutineContext) {
             val result = store.refresh(dto)
-
-            if (result == null) {
-                return@withContext ServerResponse.badRequest(
+                ?: return@withContext ServerResponse.badRequest(
                     message = "Invalid refresh token"
                 )
-            }
 
             return@withContext ServerResponse.ok(
                 data = result,
@@ -78,12 +69,9 @@ class DefaultAuthHandler(
     override suspend fun forgotPassword(dto: ForgotPasswordDto): APIResponse<AuthDto?> {
         return withContext(coroutineContext) {
             val result = store.forgotPassword(dto)
-
-            if (result == null) {
-                return@withContext ServerResponse.badRequest(
+                ?: return@withContext ServerResponse.badRequest(
                     message = "Unable to process change of password, try again."
                 )
-            }
 
             return@withContext ServerResponse.ok(
                 data = result,

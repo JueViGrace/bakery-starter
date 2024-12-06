@@ -1,6 +1,6 @@
 package com.bakery.auth.validation
 
-import com.bakery.auth.shared.types.SignInDto
+import com.bakery.core.shared.types.auth.SignInDto
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 

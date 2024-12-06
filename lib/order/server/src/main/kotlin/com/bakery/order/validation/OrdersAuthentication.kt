@@ -3,10 +3,10 @@ package com.bakery.order.validation
 import com.bakery.core.types.OrderDataValidation
 import com.bakery.core.types.UserIdValidation
 import com.bakery.core.util.Jwt
-import com.bakery.order.shared.types.CancelOrderDto
-import com.bakery.order.shared.types.CreateOrderDto
-import com.bakery.order.shared.types.OrderByUserDto
-import com.bakery.order.shared.types.OrdersByUserDto
+import com.bakery.core.shared.types.order.CancelOrderDto
+import com.bakery.core.shared.types.order.CreateOrderDto
+import com.bakery.core.shared.types.order.OrderByUserDto
+import com.bakery.core.shared.types.order.OrdersByUserDto
 import io.ktor.server.auth.AuthenticationConfig
 import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.jwt.jwt
@@ -26,15 +26,9 @@ fun AuthenticationConfig.ordersAuth(
 
         validate { credential ->
             jwt.validateCredential(credential) {
-                val tokenId = extractId(credential)
-                if (tokenId == null) {
-                    return@validateCredential null
-                }
+                val tokenId = extractId(credential) ?: return@validateCredential null
 
-                val user = userCall(tokenId)
-                if (user == null) {
-                    return@validateCredential null
-                }
+                val user = userCall(tokenId) ?: return@validateCredential null
 
                 if (user.isAdmin) {
                     return@validateCredential JWTPrincipal(credential.payload)
@@ -57,10 +51,7 @@ fun AuthenticationConfig.ordersAuth(
                         }
                     }
                     is CancelOrderDto -> {
-                        val order = orderCall(body.id)
-                        if (order == null) {
-                            return@validateCredential null
-                        }
+                        val order = orderCall(body.id) ?: return@validateCredential null
 
                         if (user.userId != order.userId) {
                             return@validateCredential null

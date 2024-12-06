@@ -11,7 +11,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import com.bakery.core.types.common.capitalizeString
 
 @Composable
 fun CustomText(
@@ -26,9 +25,8 @@ fun CustomText(
     softWrap: Boolean = true,
     overflow: TextOverflow = TextOverflow.Clip
 ) {
-    // todo: remove capitalization
     Text(
-        text = text.capitalizeString(),
+        text = text,
         fontSize = fontSize,
         fontWeight = fontWeight,
         textAlign = textAlign,

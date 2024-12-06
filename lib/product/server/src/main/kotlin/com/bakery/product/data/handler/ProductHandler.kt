@@ -1,11 +1,11 @@
 package com.bakery.product.data.handler
 
+import com.bakery.core.shared.types.product.CreateProductDto
+import com.bakery.core.shared.types.product.ProductDto
+import com.bakery.core.shared.types.product.UpdateProductDto
 import com.bakery.core.types.APIResponse
 import com.bakery.core.types.ServerResponse
 import com.bakery.product.data.storage.ProductStorage
-import com.bakery.product.shared.types.CreateProductDto
-import com.bakery.product.shared.types.ProductDto
-import com.bakery.product.shared.types.UpdateProductDto
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 

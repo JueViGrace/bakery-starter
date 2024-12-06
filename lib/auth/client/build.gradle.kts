@@ -34,9 +34,6 @@ kotlin {
             // Types: client
             implementation(projects.lib.core.client.types)
 
-            // Types: auth
-            implementation(projects.lib.auth.shared.types)
-
             // Database: client
             implementation(projects.lib.core.client.database)
 
@@ -63,6 +60,9 @@ kotlin {
 
             // Coroutines
             implementation(libs.kotlinx.coroutines.core)
+
+            // Ktor: client
+            implementation(libs.ktor.client.core)
 
             // Koin
             implementation(libs.koin.core)

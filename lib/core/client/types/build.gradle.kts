@@ -29,6 +29,9 @@ kotlin {
             // Types: core
             implementation(projects.lib.core.shared.types)
 
+            // Database: client
+            implementation(projects.lib.core.client.database)
+
             // Compose Resources
             implementation(projects.lib.core.client.resources)
 

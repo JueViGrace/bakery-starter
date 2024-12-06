@@ -31,7 +31,7 @@ class DefaultNavigator(
     private val _navigationActions = Channel<NavigationAction>()
     override val navigationActions: Flow<NavigationAction> = _navigationActions.receiveAsFlow()
 
-    private val _currentDestination = MutableStateFlow<Destination>(startDestination)
+    private val _currentDestination = MutableStateFlow(startDestination)
     override val currentDestination: StateFlow<Destination> = _currentDestination.asStateFlow()
 
     override suspend fun navigate(

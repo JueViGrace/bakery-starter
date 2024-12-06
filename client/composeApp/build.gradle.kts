@@ -66,9 +66,6 @@ kotlin {
             // Auth
             implementation(projects.lib.auth.client)
 
-            // Auth: types
-            implementation(projects.lib.auth.shared.types)
-
             // Compose
             implementation(compose.runtime)
             implementation(compose.foundation)

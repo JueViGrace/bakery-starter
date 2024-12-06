@@ -3,9 +3,9 @@ package com.bakery.order.data.handler
 import com.bakery.core.types.APIResponse
 import com.bakery.core.types.ServerResponse
 import com.bakery.order.data.storage.OrderStorage
-import com.bakery.order.shared.types.CreateOrderDto
-import com.bakery.order.shared.types.OrderDto
-import com.bakery.order.shared.types.UpdateOrderDto
+import com.bakery.core.shared.types.order.CreateOrderDto
+import com.bakery.core.shared.types.order.OrderDto
+import com.bakery.core.shared.types.order.UpdateOrderDto
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 

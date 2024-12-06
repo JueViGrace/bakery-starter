@@ -1,11 +1,11 @@
 package com.bakery.product.data.storage
 
 import com.bakery.core.database.helper.DbHelper
-import com.bakery.product.data.mappers.toDb
-import com.bakery.product.data.mappers.toDto
-import com.bakery.product.shared.types.CreateProductDto
-import com.bakery.product.shared.types.ProductDto
-import com.bakery.product.shared.types.UpdateProductDto
+import com.bakery.core.shared.types.product.CreateProductDto
+import com.bakery.core.shared.types.product.ProductDto
+import com.bakery.core.shared.types.product.UpdateProductDto
+import com.bakery.core.types.product.toDb
+import com.bakery.core.types.product.toDto
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 
@@ -64,16 +64,13 @@ class DefaultProductStorage(
         return scope.async {
             dbHelper.withDatabase { db ->
                 db.transactionWithResult {
-                    val product = db.bakeryProductQueries
+                    db.bakeryProductQueries
                         .insert(
                             bakery_product = dto.toDb(images)
                         )
                         .executeAsOneOrNull()
                         ?.toDto()
-                    if (product == null) {
-                        return@transactionWithResult rollback(null)
-                    }
-                    product
+                        ?: rollback(null)
                 }
             }
         }.await()
@@ -100,7 +97,7 @@ class DefaultProductStorage(
                         .executeAsOneOrNull()
                         ?.toDto()
                     if (product == null) {
-                        return@transactionWithResult rollback(null)
+                        rollback(null)
                     }
                     product
                 }
@@ -114,7 +111,7 @@ class DefaultProductStorage(
                 db.transactionWithResult {
                     val product = db.bakeryProductQueries.softDelete(id).executeAsOneOrNull()?.toDto()
                     if (product != null) {
-                        return@transactionWithResult rollback(product)
+                        rollback(product)
                     }
                     null
                 }
@@ -128,7 +125,7 @@ class DefaultProductStorage(
                 db.transactionWithResult {
                     val product = db.bakeryProductQueries.delete(id).executeAsOneOrNull()?.toDto()
                     if (product != null) {
-                        return@transactionWithResult rollback(product)
+                        rollback(product)
                     }
                     null
                 }

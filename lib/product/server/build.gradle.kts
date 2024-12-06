@@ -11,9 +11,6 @@ dependencies {
     // Types: server
     implementation(projects.lib.core.server.types)
 
-    // Types: product
-    implementation(projects.lib.product.shared.types)
-
     // Util: Server
     implementation(projects.lib.core.server.util)
 

@@ -2,6 +2,7 @@
     <string name="app_name">Bakery and Deserts</string>
     <string name="welcome">Bienvenido a Bakery and Deserts</string>
     <string name="welcome_back">Bienvenido de vuelta!</string>
+    <string name="log_in">Inicia sesión</string>
     <string name="auth_no_data">No se encontraron datos para este usuario.</string>
     <string name="session_expired">Tu sessión ha expirado, inicia sesión nuevamente.</string>
     <string name="version_error">Tienes una versión antigua de la app, por favor actualiza a la versión mas reciente.</string>

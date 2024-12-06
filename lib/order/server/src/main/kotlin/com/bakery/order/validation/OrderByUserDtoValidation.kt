@@ -1,7 +1,7 @@
 package com.bakery.order.validation
 
+import com.bakery.core.shared.types.order.OrdersByUserDto
 import com.bakery.core.util.Util.validUuid
-import com.bakery.order.shared.types.OrdersByUserDto
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 

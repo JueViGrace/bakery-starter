@@ -1,10 +1,10 @@
 package com.bakery.auth.routes
 
 import com.bakery.auth.data.handler.AuthHandler
-import com.bakery.auth.shared.types.ForgotPasswordDto
-import com.bakery.auth.shared.types.RefreshTokenDto
-import com.bakery.auth.shared.types.SignInDto
-import com.bakery.auth.shared.types.SignUpDto
+import com.bakery.core.shared.types.auth.ForgotPasswordDto
+import com.bakery.core.shared.types.auth.RefreshTokenDto
+import com.bakery.core.shared.types.auth.SignInDto
+import com.bakery.core.shared.types.auth.SignUpDto
 import com.bakery.core.types.applicationResponse
 import io.ktor.http.Cookie
 import io.ktor.http.HttpStatusCode
@@ -78,6 +78,7 @@ fun Route.authRoutes() {
             )
         }
 
+        // this should send an email or receive the new password
         post("/forgotPassword") {
             val body = call.receive<ForgotPasswordDto>()
             val response = handler.forgotPassword(body)

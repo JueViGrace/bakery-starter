@@ -3,9 +3,9 @@ package com.bakery.product.routes
 import com.bakery.core.types.JwtAuthName
 import com.bakery.core.types.applicationResponse
 import com.bakery.product.data.handler.ProductHandler
-import com.bakery.product.shared.types.CreateProductDto
-import com.bakery.product.shared.types.ProductByIdDto
-import com.bakery.product.shared.types.UpdateProductDto
+import com.bakery.core.shared.types.product.CreateProductDto
+import com.bakery.core.shared.types.product.ProductByIdDto
+import com.bakery.core.shared.types.product.UpdateProductDto
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
 import io.ktor.server.auth.AuthenticationStrategy

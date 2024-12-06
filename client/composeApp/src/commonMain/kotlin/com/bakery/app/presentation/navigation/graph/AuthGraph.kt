@@ -3,8 +3,8 @@ package com.bakery.app.presentation.navigation.graph
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.bakery.auth.presentation.screens.ForgotPasswordScreen
-import com.bakery.auth.presentation.screens.LoginScreen
+import com.bakery.auth.presentation.ui.screens.ForgotPasswordScreen
+import com.bakery.auth.presentation.ui.screens.AuthScreen
 import com.bakery.core.presentation.navigation.Destination
 
 fun NavGraphBuilder.authGraph() {
@@ -12,7 +12,7 @@ fun NavGraphBuilder.authGraph() {
         startDestination = Destination.Login
     ) {
         composable<Destination.Login> {
-            LoginScreen()
+            AuthScreen()
         }
 
         composable<Destination.ForgotPassword> {

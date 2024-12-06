@@ -1,6 +1,6 @@
 package com.bakery.product.validation
 
-import com.bakery.product.shared.types.UpdateProductDto
+import com.bakery.core.shared.types.product.UpdateProductDto
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
 import io.ktor.server.plugins.requestvalidation.ValidationResult
 
