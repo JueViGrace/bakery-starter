@@ -32,7 +32,7 @@ fun LetterComponent(
             .padding(10.dp),
         contentAlignment = Alignment.Center
     ) {
-        CustomText(
+        TextComponent(
             text = letter,
             fontSize = fontSize,
             fontWeight = fontWeight,

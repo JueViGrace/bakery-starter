@@ -13,7 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 
 @Composable
-fun CustomText(
+fun TextComponent(
     modifier: Modifier = Modifier,
     text: String,
     fontSize: TextUnit = MaterialTheme.typography.bodyMedium.fontSize,

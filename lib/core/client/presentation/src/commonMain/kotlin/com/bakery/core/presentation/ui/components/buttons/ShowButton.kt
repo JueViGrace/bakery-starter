@@ -10,7 +10,9 @@ import com.bakery.core.presentation.ui.components.icons.IconComponent
 import com.bakery.core.resources.resources.generated.resources.Res
 import com.bakery.core.resources.resources.generated.resources.ic_caret_down
 import com.bakery.core.resources.resources.generated.resources.ic_caret_up
+import com.bakery.core.resources.resources.generated.resources.show
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun ShowButton(
@@ -32,7 +34,7 @@ fun ShowButton(
                 } else {
                     painterResource(Res.drawable.ic_caret_up)
                 },
-                contentDescription = "Show button"
+                contentDescription = stringResource(Res.string.show)
             )
         }
     }

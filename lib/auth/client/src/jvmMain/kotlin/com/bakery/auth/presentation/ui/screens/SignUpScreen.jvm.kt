@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.bakery.auth.presentation.events.AuthEvents
 import com.bakery.auth.presentation.state.SignUpState
-import com.bakery.core.presentation.ui.components.display.CustomText
+import com.bakery.core.presentation.ui.components.display.TextComponent
 
 @Composable
 actual fun SignUpScreen(
@@ -29,7 +29,7 @@ actual fun SignUpScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CustomText(text = "Jvm Sign Up")
+            TextComponent(text = "Jvm Sign Up")
         }
     }
 }

@@ -3,6 +3,7 @@ package com.bakery.auth.presentation.events
 sealed interface AuthEvents {
     data class OnSignInUsernameChanged(val value: String) : AuthEvents
     data class OnSignInPasswordChanged(val value: String) : AuthEvents
+    data object TogglePasswordVisibility : AuthEvents
     data object OnSignInSubmit : AuthEvents
     data class OnSignUpFirstNameChanged(val value: String) : AuthEvents
     data class OnSignUpLastNameChanged(val value: String) : AuthEvents

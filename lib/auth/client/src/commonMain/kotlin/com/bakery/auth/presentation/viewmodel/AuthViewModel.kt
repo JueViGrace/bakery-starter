@@ -52,6 +52,7 @@ class AuthViewModel(
         when (event) {
             is AuthEvents.OnSignInUsernameChanged -> signInUsernameChanged(event.value)
             is AuthEvents.OnSignInPasswordChanged -> signInPasswordChanged(event.value)
+            AuthEvents.TogglePasswordVisibility -> togglePasswordVisibility()
             AuthEvents.OnSignInSubmit -> onSignInSubmit()
             is AuthEvents.OnSignUpFirstNameChanged -> signUpFirstNameChanged(event.value)
             is AuthEvents.OnSignUpLastNameChanged -> signUpLastNameChanged(event.value)
@@ -70,7 +71,8 @@ class AuthViewModel(
     private fun signInUsernameChanged(value: String) {
         _signInstate.update { state ->
             state.copy(
-                username = value
+                username = value,
+                signInEnabled = state.username.isNotEmpty() && state.password.isNotEmpty()
             )
         }
     }
@@ -78,7 +80,16 @@ class AuthViewModel(
     private fun signInPasswordChanged(value: String) {
         _signInstate.update { state ->
             state.copy(
-                password = value
+                password = value,
+                signInEnabled = state.username.isNotEmpty() && state.password.isNotEmpty()
+            )
+        }
+    }
+
+    private fun togglePasswordVisibility() {
+        _signInstate.update { state ->
+            state.copy(
+                passwordVisibility = !state.passwordVisibility
             )
         }
     }

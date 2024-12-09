@@ -41,7 +41,7 @@ fun Navigation(
     ) { msg ->
         msg.message?.let { message ->
             scope.launch {
-                snackBarHostState.showSnackbar("${getString(message)} ${msg.description}")
+                snackBarHostState.showSnackbar("${getString(message)} ${msg.description ?: ""}")
             }
         }
     }

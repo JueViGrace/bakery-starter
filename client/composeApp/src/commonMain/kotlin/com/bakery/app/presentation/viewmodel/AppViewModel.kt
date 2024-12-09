@@ -34,7 +34,7 @@ class AppViewModel(
                 navigator.navigate(
                     destination = Destination.AuthGraph,
                     navOptions = {
-                        popUpTo(Destination.AuthGraph) {
+                        popUpTo(Destination.Splash) {
                             inclusive = true
                         }
                         launchSingleTop = true

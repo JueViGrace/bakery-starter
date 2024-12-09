@@ -10,4 +10,8 @@ data class SignInState(
     // Validation messages
     val usernameError: StringResource? = null,
     val passwordError: StringResource? = null,
+
+    // Screen state
+    val passwordVisibility: Boolean = false,
+    val signInEnabled: Boolean = false,
 )

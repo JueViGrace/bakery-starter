@@ -5,7 +5,7 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.bakery.core.presentation.ui.components.display.CustomText
+import com.bakery.core.presentation.ui.components.display.TextComponent
 
 @Composable
 fun DrawerNavItem(
@@ -22,7 +22,7 @@ fun DrawerNavItem(
             onSelect()
         },
         icon = icon,
-        label = { CustomText(text = title) },
+        label = { TextComponent(text = title) },
         shape = RoundedCornerShape(8.dp)
     )
 }
