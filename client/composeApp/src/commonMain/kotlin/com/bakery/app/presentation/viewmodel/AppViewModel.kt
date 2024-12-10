@@ -2,6 +2,7 @@ package com.bakery.app.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavOptions
 import com.bakery.app.data.AppRepository
 import com.bakery.app.presentation.state.AppState
 import com.bakery.core.presentation.messages.Messages
@@ -32,13 +33,11 @@ class AppViewModel(
             is RequestState.Error -> {
                 delay(1000)
                 navigator.navigate(
-                    destination = Destination.AuthGraph,
-                    navOptions = {
-                        popUpTo(Destination.Splash) {
-                            inclusive = true
-                        }
-                        launchSingleTop = true
-                    }
+                    destination = Destination.SignIn,
+                    navOptions = NavOptions.Builder().apply {
+                        setPopUpTo(route = Destination.Splash, inclusive = true)
+                        setLaunchSingleTop(true)
+                    }.build()
                 )
                 state.copy(
                     session = null,
@@ -49,13 +48,11 @@ class AppViewModel(
             is RequestState.Success -> {
                 delay(1000)
                 navigator.navigate(
-                    destination = Destination.HomeGraph,
-                    navOptions = {
-                        popUpTo(Destination.AuthGraph) {
-                            inclusive = true
-                        }
-                        launchSingleTop = true
-                    }
+                    destination = Destination.Home,
+                    navOptions = NavOptions.Builder().apply {
+                        setPopUpTo(route = Destination.Splash, inclusive = true)
+                        setLaunchSingleTop(true)
+                    }.build()
                 )
                 state.copy(
                     session = session.data,

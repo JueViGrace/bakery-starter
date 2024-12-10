@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PlatformImeOptions
 import com.bakery.core.presentation.ui.components.display.TextComponent
 import com.bakery.core.presentation.ui.components.icons.IconComponent
 import com.bakery.core.resources.resources.generated.resources.Res
@@ -20,6 +19,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun UsernameTextField(
+    modifier: Modifier = Modifier.fillMaxWidth(),
     value: String,
     onValueChange: (String) -> Unit,
     errorMessage: String? = null,
@@ -27,7 +27,7 @@ fun UsernameTextField(
     isError: Boolean = errorMessage != null,
 ) {
     OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         value = value,
         onValueChange = onValueChange,
         enabled = enabled,

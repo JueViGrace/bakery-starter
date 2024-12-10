@@ -36,7 +36,7 @@ class Jwt(
     fun createRefreshToken(claims: Map<String, String>): String =
         createJwt(claims, REFRESH_EXPIRES_IN)
 
-    fun createJwt(claims: Map<String, String>, expiresIn: String): String {
+    private fun createJwt(claims: Map<String, String>, expiresIn: String): String {
         return JWT.create()
             .withAudience(audience)
             .withIssuer(issuer)
@@ -57,16 +57,12 @@ class Jwt(
             credential.payload.issuer != issuer -> null
             credential.payload.subject == null -> null
             credential.payload.expiresAtAsInstant < Clock.System.now().toJavaInstant() -> null
-            else -> block()
+            else -> this.block()
         }
     }
 
     fun verifyToken(token: String): Token? {
-        val decodedToken: DecodedJWT? = jwtVerifier.verify(token)
-
-        if (decodedToken == null) {
-            return null
-        }
+        val decodedToken: DecodedJWT = jwtVerifier.verify(token) ?: return null
 
         if (decodedToken.expiresAtAsInstant < Clock.System.now().toJavaInstant()) {
             return null

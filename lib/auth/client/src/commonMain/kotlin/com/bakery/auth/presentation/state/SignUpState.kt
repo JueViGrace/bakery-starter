@@ -15,7 +15,7 @@ data class SignUpState(
     val address2: String = "",
     val gender: String = "",
 
-    // Validation errors
+    // Errors messages
     val firstNameError: StringResource? = null,
     val lastNameError: StringResource? = null,
     val usernameError: StringResource? = null,
@@ -26,4 +26,8 @@ data class SignUpState(
     val address1Error: StringResource? = null,
     val address2Error: StringResource? = null,
     val genderError: StringResource? = null,
+    val errorMessage: StringResource? = null,
+
+    // Screen state
+    val isLoading: Boolean = false,
 )

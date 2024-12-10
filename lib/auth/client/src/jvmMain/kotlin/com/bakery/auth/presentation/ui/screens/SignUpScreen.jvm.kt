@@ -11,14 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.bakery.auth.presentation.events.AuthEvents
-import com.bakery.auth.presentation.state.SignUpState
+import com.bakery.auth.presentation.viewmodel.SignUpViewModel
 import com.bakery.core.presentation.ui.components.display.TextComponent
 
 @Composable
 actual fun SignUpScreen(
-    state: SignUpState,
-    onEvent: (AuthEvents) -> Unit,
+    viewModel: SignUpViewModel
 ) {
     ElevatedCard(
         modifier = Modifier.fillMaxSize().wrapContentSize(),

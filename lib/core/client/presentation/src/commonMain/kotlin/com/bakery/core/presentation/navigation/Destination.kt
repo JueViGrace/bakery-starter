@@ -13,7 +13,10 @@ sealed interface Destination {
     data object AuthGraph : Destination
 
     @Serializable
-    data object Login : Destination
+    data object SignIn : Destination
+
+    @Serializable
+    data object SignUp : Destination
 
     @Serializable
     data object ForgotPassword : Destination

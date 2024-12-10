@@ -2,7 +2,6 @@ package com.bakery.app.presentation.navigation.components
 
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -31,8 +30,12 @@ fun Navigation(
         flow = navigator.navigationActions,
     ) { action ->
         when (action) {
-            is NavigationAction.Navigate -> navController.navigate(action.destination, builder = action.navOptions)
-            NavigationAction.NavigateUp -> navController.navigateUp()
+            is NavigationAction.Navigate -> {
+                navController.navigate(action.destination, navOptions = action.navOptions)
+            }
+            NavigationAction.NavigateUp -> {
+                navController.navigateUp()
+            }
         }
     }
 

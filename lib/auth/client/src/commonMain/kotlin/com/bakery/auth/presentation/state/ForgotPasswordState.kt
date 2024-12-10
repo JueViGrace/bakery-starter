@@ -2,18 +2,14 @@ package com.bakery.auth.presentation.state
 
 import org.jetbrains.compose.resources.StringResource
 
-data class SignInState(
+data class ForgotPasswordState(
     // Field values
     val username: String = "",
-    val password: String = "",
 
-    // Error messages
+    // Error message
     val usernameError: StringResource? = null,
-    val passwordError: StringResource? = null,
     val errorMessage: StringResource? = null,
 
     // Screen state
-    val passwordVisibility: Boolean = false,
-    val signInEnabled: Boolean = false,
     val isLoading: Boolean = false,
 )

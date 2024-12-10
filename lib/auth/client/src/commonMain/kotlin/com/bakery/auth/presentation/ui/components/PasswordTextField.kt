@@ -27,6 +27,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun PasswordTextField(
+    modifier: Modifier = Modifier.fillMaxWidth(),
     value: String,
     onValueChange: (String) -> Unit,
     errorMessage: String? = null,
@@ -37,7 +38,7 @@ fun PasswordTextField(
 ) {
     val focus = LocalFocusManager.current
     OutlinedTextField(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         value = value,
         onValueChange = onValueChange,
         enabled = enabled,

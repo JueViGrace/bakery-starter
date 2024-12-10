@@ -1,10 +1,10 @@
 package com.bakery.user.data.handler
 
+import com.bakery.core.shared.types.user.UpdateUserDto
+import com.bakery.core.shared.types.user.UserDto
 import com.bakery.core.types.APIResponse
 import com.bakery.core.types.ServerResponse
 import com.bakery.user.data.storage.UserStorage
-import com.bakery.core.shared.types.user.UpdateUserDto
-import com.bakery.user.shared.UserDto
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
@@ -17,7 +17,6 @@ interface UserHandler {
     suspend fun softDeleteUser(id: String): APIResponse<String>
     suspend fun deleteUser(id: String): APIResponse<String>
 }
-
 
 class DefaultUserHandler(
     private val coroutineContext: CoroutineContext,
@@ -41,12 +40,9 @@ class DefaultUserHandler(
     override suspend fun getUserById(id: String): APIResponse<UserDto?> {
         return withContext(coroutineContext) {
             val result = store.getUserById(id)
-
-            if (result == null) {
-                return@withContext ServerResponse.notFound(
+                ?: return@withContext ServerResponse.notFound(
                     message = "User with id $id was not found"
                 )
-            }
 
             ServerResponse.ok(data = result, message = "Processed successfully")
         }
@@ -55,12 +51,9 @@ class DefaultUserHandler(
     override suspend fun getExistingUserById(id: String): APIResponse<UserDto?> {
         return withContext(coroutineContext) {
             val result = store.getExistingUserById(id)
-
-            if (result == null) {
-                return@withContext ServerResponse.notFound(
+                ?: return@withContext ServerResponse.notFound(
                     message = "User with id $id was not found"
                 )
-            }
 
             ServerResponse.ok(data = result, message = "Processed successfully")
         }
@@ -69,12 +62,9 @@ class DefaultUserHandler(
     override suspend fun updateUser(dto: UpdateUserDto): APIResponse<UserDto?> {
         return withContext(coroutineContext) {
             val result = store.updateUser(dto)
-
-            if (result == null) {
-                return@withContext ServerResponse.notFound(
+                ?: return@withContext ServerResponse.notFound(
                     message = "Unable to update user, try again later"
                 )
-            }
 
             ServerResponse.accepted(data = result, message = "Processed successfully")
         }

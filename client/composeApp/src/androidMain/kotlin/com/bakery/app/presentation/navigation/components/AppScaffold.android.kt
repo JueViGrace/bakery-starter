@@ -6,9 +6,9 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,6 +17,9 @@ import com.bakery.app.presentation.navigation.graph.homeGraph
 import com.bakery.app.splash.presentation.ui.screen.SplashScreen
 import com.bakery.core.presentation.navigation.Destination
 import com.bakery.core.presentation.navigation.Navigator
+import com.bakery.core.presentation.ui.components.buttons.BackArrowButton
+import com.bakery.core.presentation.ui.components.layout.TopBarComponent
+import kotlinx.coroutines.launch
 
 @Composable
 actual fun AppScaffold(
@@ -25,16 +28,65 @@ actual fun AppScaffold(
     navigator: Navigator,
     snackBarHostState: SnackbarHostState,
 ) {
-    val currentDestination by navigator.currentDestination.collectAsStateWithLifecycle()
+    val stack by navigator.stack.collectAsStateWithLifecycle()
+    val scope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
-            if (currentDestination == Destination.HomeGraph) {
+            when (stack.currentDestination) {
+                Destination.AuthGraph -> { }
+                Destination.Cart -> { }
+                Destination.Checkout -> { }
+                Destination.ForgotPassword -> {
+                    TopBarComponent(
+                        navigationIcon = {
+                            BackArrowButton {
+                                scope.launch {
+                                    navigator.navigateUp()
+                                }
+                            }
+                        },
+                    )
+                }
+
+                Destination.Home -> { }
+                Destination.HomeGraph -> { }
+                Destination.Notifications -> {
+                    TopBarComponent(
+                        navigationIcon = {
+                            BackArrowButton {
+                                scope.launch {
+                                    navigator.navigateUp()
+                                }
+                            }
+                        },
+                    )
+                }
+
+                is Destination.OrderDetails -> { }
+                Destination.Orders -> { }
+                is Destination.ProductDetails -> { }
+                Destination.Products -> { }
+                Destination.Profile -> { }
+                Destination.Settings -> {
+                    TopBarComponent(
+                        navigationIcon = {
+                            BackArrowButton {
+                                scope.launch {
+                                    navigator.navigateUp()
+                                }
+                            }
+                        },
+                    )
+                }
+
+                Destination.SignIn -> { }
+                Destination.SignUp -> { }
+                Destination.Splash -> { }
+                null -> { }
             }
         },
         bottomBar = {
-            if (currentDestination == Destination.HomeGraph) {
-
-            }
         },
         snackbarHost = {
             SnackbarHost(hostState = snackBarHostState)

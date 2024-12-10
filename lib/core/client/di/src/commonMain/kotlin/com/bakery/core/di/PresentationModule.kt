@@ -17,7 +17,7 @@ fun presentationModule(): Module = module {
     single<Navigator> {
         DefaultNavigator(
             startDestination = Destination.Splash,
-            stateHandle = get()
+            stateHandle = get(),
         )
     }
 
