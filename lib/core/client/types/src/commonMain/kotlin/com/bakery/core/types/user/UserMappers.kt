@@ -1,7 +1,6 @@
 package com.bakery.core.types.user
 
 import com.bakery.core.shared.types.user.UserDto
-import com.bakery.core.types.User
 import com.bakery.core.types.aliases.BakeryUser
 
 fun UserDto.dtoToDomain(): User = User(

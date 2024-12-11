@@ -1,4 +1,6 @@
-package com.bakery.core.types
+package com.bakery.core.types.auth
+
+import com.bakery.core.types.user.User
 
 data class Session(
     val accessToken: String,

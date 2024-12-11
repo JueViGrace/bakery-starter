@@ -2,17 +2,14 @@ package com.bakery.app.data
 
 import com.bakery.core.api.KtorClient
 import com.bakery.core.database.helper.DbHelper
-import com.bakery.core.presentation.messages.Messages
 import com.bakery.core.resources.resources.generated.resources.Res
 import com.bakery.core.resources.resources.generated.resources.session_expired
 import com.bakery.core.resources.resources.generated.resources.unexpected_error
 import com.bakery.core.resources.resources.generated.resources.unknown_error
-import com.bakery.core.resources.resources.generated.resources.welcome
-import com.bakery.core.resources.resources.generated.resources.welcome_back
 import com.bakery.core.shared.types.auth.AuthDto
 import com.bakery.core.shared.types.auth.RefreshTokenDto
 import com.bakery.core.types.Repository
-import com.bakery.core.types.Session
+import com.bakery.core.types.auth.Session
 import com.bakery.core.types.auth.dtoToDomain
 import com.bakery.core.types.auth.findToDomain
 import com.bakery.core.types.auth.sessionToDb

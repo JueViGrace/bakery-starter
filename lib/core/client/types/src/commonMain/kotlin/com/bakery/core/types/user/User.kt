@@ -1,4 +1,4 @@
-package com.bakery.core.types
+package com.bakery.core.types.user
 
 data class User(
     val id: String,

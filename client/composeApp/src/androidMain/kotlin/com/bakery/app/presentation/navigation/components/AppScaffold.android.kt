@@ -21,6 +21,7 @@ import com.bakery.core.presentation.ui.components.buttons.BackArrowButton
 import com.bakery.core.presentation.ui.components.layout.TopBarComponent
 import kotlinx.coroutines.launch
 
+// TODO: limit access to screens
 @Composable
 actual fun AppScaffold(
     modifier: Modifier,

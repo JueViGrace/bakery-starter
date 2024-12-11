@@ -34,6 +34,12 @@ sealed interface Destination {
     data object Notifications : Destination
 
     @Serializable
+    data object Users : Destination
+
+    @Serializable
+    data class UserDetails(val id: String) : Destination
+
+    @Serializable
     data object Products : Destination
 
     @Serializable

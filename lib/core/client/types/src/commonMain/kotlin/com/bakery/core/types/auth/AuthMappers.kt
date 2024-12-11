@@ -3,8 +3,7 @@ package com.bakery.core.types.auth
 import com.bakery.core.database.Bakery_session
 import com.bakery.core.database.FindActiveAccount
 import com.bakery.core.shared.types.auth.AuthDto
-import com.bakery.core.types.Session
-import com.bakery.core.types.User
+import com.bakery.core.types.user.User
 import com.bakery.core.types.user.dtoToDomain
 
 private typealias BakerySession = Bakery_session

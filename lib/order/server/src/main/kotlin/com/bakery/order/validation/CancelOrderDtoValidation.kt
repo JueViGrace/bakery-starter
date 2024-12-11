@@ -1,6 +1,6 @@
 package com.bakery.order.validation
 
-import com.bakery.core.types.OrderStatus
+import com.bakery.core.shared.types.order.OrderStatus
 import com.bakery.core.util.Util.validUuid
 import com.bakery.core.shared.types.order.UpdateOrderDto
 import io.ktor.server.plugins.requestvalidation.RequestValidationConfig
@@ -12,7 +12,7 @@ fun RequestValidationConfig.validateCancelOrderDto() {
             dto.id.isBlank() -> ValidationResult.Invalid("Id cannot be blank")
             !validUuid(dto.id) -> ValidationResult.Invalid("Id is not valid")
             dto.status.isBlank() -> ValidationResult.Invalid("Status cannot be blank")
-            OrderStatus.valueOf(dto.status) != OrderStatus.CANCELLED -> ValidationResult.Invalid("Status is not valid")
+            OrderStatus.valueOf(dto.status) != OrderStatus.Cancelled -> ValidationResult.Invalid("Status is not valid")
             else -> ValidationResult.Valid
         }
     }

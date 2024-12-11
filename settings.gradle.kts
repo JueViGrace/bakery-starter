@@ -52,7 +52,7 @@ include(":lib:auth:server")
 include(":lib:user:server")
 
 // user client
-
+include(":lib:user:client")
 
 // product library
 
@@ -60,9 +60,12 @@ include(":lib:user:server")
 include(":lib:product:server")
 
 // product client
-
+include(":lib:product:client")
 
 // order library
 
 // order server
 include(":lib:order:server")
+
+// order client
+include(":lib:order:client")

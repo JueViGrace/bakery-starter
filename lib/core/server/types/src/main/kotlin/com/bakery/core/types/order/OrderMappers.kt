@@ -4,10 +4,10 @@ import com.bakery.core.shared.types.Constants
 import com.bakery.core.shared.types.order.CancelOrderDto
 import com.bakery.core.shared.types.order.CreateOrderDetailsDto
 import com.bakery.core.shared.types.order.CreateOrderDto
-import com.bakery.core.shared.types.order.OrderDetails
+import com.bakery.core.shared.types.order.OrderDetailsDto
 import com.bakery.core.shared.types.order.OrderDto
 import com.bakery.core.shared.types.order.UpdateOrderDto
-import com.bakery.core.types.OrderStatus
+import com.bakery.core.shared.types.order.OrderStatus
 import com.bakery.core.types.aliases.DbOrder
 import com.bakery.core.types.aliases.OrderByUserWithLines
 import com.bakery.core.types.aliases.OrderLines
@@ -55,11 +55,11 @@ fun List<OrderWithLines>.orderLinesToDto(): OrderDto? {
     return dto
 }
 
-fun List<OrderWithLines>.orderLinesToDetails(): List<OrderDetails> {
+fun List<OrderWithLines>.orderLinesToDetails(): List<OrderDetailsDto> {
     this.firstOrNull { row -> row.order_id == null } ?: return emptyList()
 
-    val details: List<OrderDetails> = this.map { row ->
-        return@map OrderDetails(
+    val details: List<OrderDetailsDto> = this.map { row ->
+        return@map OrderDetailsDto(
             orderId = row.order_id ?: "",
             productId = row.product_id ?: "",
             totalPrice = row.total_price ?: 0.0,
@@ -104,11 +104,11 @@ fun List<OrderByUserWithLines>.orderByUserToDto(): OrderDto? {
     return dto
 }
 
-fun List<OrderByUserWithLines>.orderByUserToDetails(): List<OrderDetails> {
+fun List<OrderByUserWithLines>.orderByUserToDetails(): List<OrderDetailsDto> {
     this.firstOrNull { row -> row.order_id == null } ?: return emptyList()
 
-    val details: List<OrderDetails> = this.map { row ->
-        return@map OrderDetails(
+    val details: List<OrderDetailsDto> = this.map { row ->
+        return@map OrderDetailsDto(
             orderId = row.order_id ?: "",
             productId = row.product_id ?: "",
             totalPrice = row.total_price ?: 0.0,
@@ -132,7 +132,7 @@ fun CreateOrderDto.toDb(
     id = Uuid.random().toString(),
     total_amount = totalAmount,
     payment_method = paymentMethod,
-    status = OrderStatus.PLACED.value,
+    status = OrderStatus.Placed.value,
     user_id = userId,
     created_at = Constants.currentTime,
     updated_at = Constants.currentTime,
@@ -151,5 +151,5 @@ fun CreateOrderDetailsDto.toDbDetails(orderId: String, totalPrice: Double): Orde
 
 fun CancelOrderDto.toUpdateDto(): UpdateOrderDto = UpdateOrderDto(
     id = id,
-    status = OrderStatus.CANCELLED.value,
+    status = OrderStatus.Cancelled.value,
 )

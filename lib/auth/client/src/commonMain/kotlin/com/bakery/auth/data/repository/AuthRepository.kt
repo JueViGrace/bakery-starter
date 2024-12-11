@@ -11,7 +11,7 @@ import com.bakery.core.shared.types.auth.ForgotPasswordDto
 import com.bakery.core.shared.types.auth.SignInDto
 import com.bakery.core.shared.types.auth.SignUpDto
 import com.bakery.core.types.Repository
-import com.bakery.core.types.Session
+import com.bakery.core.types.auth.Session
 import com.bakery.core.types.auth.dtoToDomain
 import com.bakery.core.types.auth.sessionToDb
 import com.bakery.core.types.response.display

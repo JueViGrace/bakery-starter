@@ -66,6 +66,15 @@ kotlin {
             // Auth
             implementation(projects.lib.auth.client)
 
+            // User
+            implementation(projects.lib.user.client)
+
+            // Product
+            implementation(projects.lib.product.client)
+
+            // Order
+            implementation(projects.lib.order.client)
+
             // Compose
             implementation(compose.runtime)
             implementation(compose.foundation)
