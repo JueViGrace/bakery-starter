@@ -33,6 +33,7 @@ import com.bakery.core.resources.resources.generated.resources.sign_up
 import com.bakery.core.resources.resources.generated.resources.welcome_back
 import org.jetbrains.compose.resources.stringResource
 
+// todo: improve responsive
 @Composable
 actual fun SignInScreen(
     viewModel: SignInViewModel

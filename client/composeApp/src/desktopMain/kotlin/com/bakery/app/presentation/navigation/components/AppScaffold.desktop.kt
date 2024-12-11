@@ -17,9 +17,11 @@ import com.bakery.app.presentation.navigation.graph.homeGraph
 import com.bakery.app.splash.presentation.ui.screen.SplashScreen
 import com.bakery.core.presentation.navigation.Destination
 import com.bakery.core.presentation.navigation.Navigator
+import com.bakery.core.presentation.ui.components.buttons.BackArrowButton
 import com.bakery.core.presentation.ui.components.layout.TopBarComponent
 import kotlinx.coroutines.launch
 
+// TODO: limit access to screens
 @Composable
 actual fun AppScaffold(
     modifier: Modifier,
@@ -37,11 +39,15 @@ actual fun AppScaffold(
                 Destination.Cart -> {}
                 Destination.Checkout -> {}
                 Destination.ForgotPassword -> {
-                    TopBarComponent {
-                        scope.launch {
-                            navigator.navigateUp()
+                    TopBarComponent(
+                        navigationIcon = {
+                            BackArrowButton {
+                                scope.launch {
+                                    navigator.navigateUp()
+                                }
+                            }
                         }
-                    }
+                    )
                 }
                 Destination.Home -> {}
                 Destination.HomeGraph -> {}
@@ -55,6 +61,8 @@ actual fun AppScaffold(
                 Destination.SignIn -> {}
                 Destination.SignUp -> {}
                 Destination.Splash -> {}
+                is Destination.UserDetails -> {}
+                Destination.Users -> {}
                 null -> {}
             }
         },

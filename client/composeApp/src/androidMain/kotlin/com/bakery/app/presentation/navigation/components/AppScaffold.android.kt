@@ -84,6 +84,8 @@ actual fun AppScaffold(
                 Destination.SignIn -> { }
                 Destination.SignUp -> { }
                 Destination.Splash -> { }
+                is Destination.UserDetails -> {}
+                Destination.Users -> {}
                 null -> { }
             }
         },
