@@ -114,14 +114,25 @@ kotlin {
 
 android {
     namespace = "com.bakery.app"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileSdk =
+        libs.versions.android.compileSdk
+            .get()
+            .toInt()
 
     defaultConfig {
         applicationId = "com.bakery.app"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
+        minSdk =
+            libs.versions.android.minSdk
+                .get()
+                .toInt()
+        targetSdk =
+            libs.versions.android.targetSdk
+                .get()
+                .toInt()
         versionCode = 1
-        versionName = libs.versions.app.version.get()
+        versionName =
+            libs.versions.app.version
+                .get()
     }
     packaging {
         resources {
@@ -153,8 +164,10 @@ compose {
 
             nativeDistributions {
                 targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-                packageName = "com.closs.app"
-                packageVersion = libs.versions.app.version.get()
+                packageName = "com.bakery.app"
+                packageVersion =
+                    libs.versions.app.version
+                        .get()
             }
         }
     }

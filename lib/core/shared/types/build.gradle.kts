@@ -31,11 +31,17 @@ kotlin {
 }
 
 android {
-    namespace = "com.closs.core.shared.types"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    namespace = "com.bakery.core.shared.types"
+    compileSdk =
+        libs.versions.android.compileSdk
+            .get()
+            .toInt()
 
     defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
+        minSdk =
+            libs.versions.android.minSdk
+                .get()
+                .toInt()
     }
 
     compileOptions {
