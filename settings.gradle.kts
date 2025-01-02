@@ -1,4 +1,4 @@
-rootProject.name = "bakery-starter"
+rootProject.name = "bakery"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -33,6 +33,7 @@ include(":lib:core:server:api")
 include(":lib:core:server:database")
 include(":lib:core:server:types")
 include(":lib:core:server:util")
+include(":lib:core:server:validation")
 
 // core shared library
 include(":lib:core:shared:di")

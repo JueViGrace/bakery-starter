@@ -29,9 +29,6 @@ dependencies {
     // Koin
     implementation(libs.koin.core)
     implementation(libs.koin.ktor)
-
-    // Kbcrypt
-    implementation(libs.kbcrypt)
 }
 
 tasks.withType<Jar> {

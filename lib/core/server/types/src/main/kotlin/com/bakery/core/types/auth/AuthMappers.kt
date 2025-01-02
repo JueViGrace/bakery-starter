@@ -2,7 +2,6 @@ package com.bakery.core.types.auth
 
 import com.bakery.core.shared.types.Constants
 import com.bakery.core.shared.types.auth.SignUpDto
-import com.bakery.core.types.Role
 import com.bakery.core.types.aliases.BakeryUser
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -20,7 +19,7 @@ fun SignUpDto.toDb(): BakeryUser = BakeryUser(
     address1 = address1,
     address2 = address2,
     gender = gender,
-    role = Role.USER.value,
+    role = "",
     created_at = Constants.currentTime,
     updated_at = Constants.currentTime,
     deleted_at = null

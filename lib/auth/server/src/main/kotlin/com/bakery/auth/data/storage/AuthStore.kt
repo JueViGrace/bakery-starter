@@ -109,7 +109,6 @@ class DefaultAuthStore(
         )
     }
 
-    // todo: delete old token?
     override suspend fun refresh(dto: RefreshTokenDto): AuthDto? {
         val token = jwt.verifyToken(dto.refreshToken) ?: return null
 
@@ -117,10 +116,7 @@ class DefaultAuthStore(
             executeOne(
                 query = db.bakeryUserQueries.findUser(token.userId)
             )
-        }
-        if (dbUser == null) {
-            return null
-        }
+        } ?: return null
 
         return saveToken(
             userDto = UserDto(
